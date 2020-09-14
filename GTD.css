@@ -1,0 +1,354 @@
+/*
+ * Cascading stylesheet for GNU Emacs org mode
+ * Nicolas P. Rougier - September 2020
+ * Released under a Creative Commons CC-BY 4.0 licence
+ */
+
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500'); 
+
+
+body {
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    font-weight: 300;
+    color:  rgba(51, 51, 51, 1.00);
+    line-height: 1.4em;
+    font-weight: light;
+    counter-reset: section;
+    counter-reset: toc-section;
+    counter-increment: toc-section;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: rgba(48,63,159, 1.00);
+}
+.org-bold {
+    font-weight: 400;
+}
+i, i a {
+    color: #999999;
+    font-style: normal;
+}
+.org-italic, .org-org-meta-line {
+    color: rgba(48,63,159, 0.75);
+    font-style: normal;
+}
+.org-face-salient {
+    font-weight: 400;
+}
+
+
+/* Blinking cursor when strike-through */
+.custom { animation: blinker 1s linear infinite; }
+@keyframes blinker { 50% { opacity: 0; } }
+
+
+/* --- Side notes --- */
+div.side-note::before {
+    content: "Note";
+    color: rgba(0,0,0,.75);
+    font-weight: 400;
+}
+div.side-note {
+    color: rgba(0,0,0,.5);
+    float: left;
+    font-size: .85em;
+    line-height: 1.25em;
+    margin-left: -24em;
+    width: 20em;
+}
+
+/* --- Table of contents --- */
+#table-of-contents {
+    padding-top: 0em;
+    margin-top: 0em;
+    text-transform: uppercase;
+}
+#table-of-contents ul {
+    padding: 0;
+    font-weight: 400;
+    list-style: none;
+    counter-reset: list 0;
+}
+#table-of-contents ul ul {
+    padding-left:0em;
+    font-weight: 300;
+    font-size: 90%;
+    line-height: 1.5em;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    padding-left: 2em;
+}
+#table-of-contents h2:before {
+    content: "";
+    counter-reset: section;
+}
+#table-of-contents ul li {
+    vertical-align: top;
+    display: inline-block;
+    width: 32%;
+}
+#table-of-contents ul li:before {
+    display: inline-block;
+    counter-increment: list;
+    content: counters(list, ".") ".";
+    width: 2.0em;
+    margin-left: -2.0em;
+    text-align: right;
+    text-transform: uppercase;
+    color:#2255bb;
+}
+#table-of-contents ul li ul,
+#table-of-contents ul li ul li {
+    display: static;
+    width: 100%;
+    padding-left: 0;
+    line-height: 1.35em;
+}
+#table-of-contents ul li ul li:before {
+    content: ""
+}
+#table-of-contents h2 {
+    font-size: 1em;
+    font-weight: 400;
+    padding-top: 5em;
+}
+#table-of-contents h2:before {
+    content: "⌘";
+}
+
+
+
+blockquote {
+    color: #999999;
+    padding-top: 0;
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: 3px solid #cccccc;
+}
+
+ul.org-ul {
+    padding-left: 0
+}
+ul.org-ul li  {
+    list-style-type: none;
+    margin-bottom: .5em;
+}
+
+ul.org-ul li p {
+    display: inline-block;
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+ul.org-ul li::before {
+    display: inline-block;
+    content: "— ";
+    color: #999999;
+    width: 1em;
+    margin-left: -1em;
+}
+
+ol.org-ol {
+    padding-left: 0;
+    margin-left: 2em;
+    list-style: none;
+    counter-reset: li;
+}
+.org-ol li  {
+    counter-increment: li;
+    margin-bottom: .25em;
+}
+.org-ol li::before {
+    content: counter(li) ". ";
+    color: #999999;
+    display: inline-block;
+    width: 2em;
+    margin-left: -2em;
+}
+
+
+
+#content, #postamble {
+    margin: 0 auto;
+    max-width: 720px;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+#postamble {
+/*    border-top: 1px solid #999999; */
+    padding-top: 1.5em;
+}
+#postamble p, #postamble a {
+    color: #999999;
+    line-height: 1.25em;
+    margin: 0;
+    text-align: right;
+}
+
+h1.title {
+    font-size: 1.5em;
+    margin-top: 4em;
+    margin-bottom: 0em;
+    font-weight: 400;
+    text-align: left;
+}
+
+span.subtitle {
+    display: inline-block;
+    margin-top: .25em;
+    font-size: 74.5%;
+    font-weight: 300;
+    color: #999999;
+}
+
+
+h3 { padding-top: .5em; }
+h1, h2, h3, h4 {
+    color: black;
+    font-size: 1em;
+    font-weight: 400;
+    /* font-variant: all-small-caps; */
+    text-transform: uppercase;
+}
+h2 { padding-top: 5em; }
+h3 { padding-top: 3em; }
+
+body {
+  counter-reset: section;
+}
+h2 {
+  counter-reset: subsection;
+}
+h2::before {
+    color: #cccccc;
+    float: left;
+    text-align: right;
+    font-weight: 300;
+    width: 7.5em;
+    margin-left: -8.0em;
+    counter-increment: section;
+    content: "Chapter " counter(section) " ";
+}
+
+
+h3::before {
+    color: #cccccc;
+    float: left;
+    text-align: right;
+    font-weight: 300;
+    width: 2.5em;
+    margin-left: -3.0em;
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) " ";
+}
+
+
+
+code {
+    background-color: #f9f9f9;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: 400;
+}
+
+pre::before {
+    color: #cccccc;
+    float: left;
+    text-align: right;
+    font-weight: 300;
+    width: 3.0em;
+    margin-left: -4.25em;
+    font-variant: small-caps;
+    content: "";
+}
+pre.src-lisp::before { content: "lisp"; }
+pre.src-org::before { content: "org"; }
+
+pre {
+    color: #00008b;
+    background-color: #fbfbfb;
+    overflow: auto;
+    margin: 0em;
+    padding: 0.25em;
+    padding-left: 0.5em;
+    line-height: 1.35em;
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: 300;
+    border-left: 2px dotted #00008b;
+}
+pre.src {
+    position: relative;
+    overflow: visible;
+}
+
+/* --- Code folding --- */
+details {
+    color: rgba(48,63,159, 1.00);
+    background: #fbfbfb;
+    border: 1px solid rgba(48,63,159, 1.00);
+    border-radius: 3px;
+    padding:  0.25em;
+    margin-bottom: 1.0em;
+}
+details pre {
+    border: 0;
+}
+details pre.src-lisp::before { content: ""; }
+summary {
+    outline: 0;
+    color: rgba(48,63,159, 1.00);
+}
+summary::after {
+    font-size: 0.85em;
+    color: rgba(48,63,159, 0.25);
+    display: inline-block;
+    float: right;
+    content: "Click to fold/unfold";
+    padding-right:  0.5em;
+}
+
+/* --- Table --- */
+table { min-width: 100%; }
+table, tbody, td, tr, th, colgroup, thead {
+    border: 0;
+/*    padding: 0;*/
+}
+table {
+    margin-top: 1em;
+}
+thead {
+    border-bottom: 1px dashed black;
+}
+th {
+    text-align: left;
+    font-weight: 400;
+    padding: 0;
+    margin-bottom: 0.25em;
+    padding-bottom: 0.25em;
+}
+td { padding: 0; }
+
+tr:nth-child(even) {background: #f9f9f9;}
+tr:nth-child(odd) {background: #ffffff;}
+tbody {
+/* border-bottom: 1px solid black; */
+}
+
+/* --- Description list --- */
+dd {
+    margin-top: 0.25em;
+    margin-bottom: 0.50em;
+}
+
+/* --- Back links in header --- */
+div.back a {
+    float: right;
+    font-weight: 300;
+    color: #cccccc;
+    font-variant: small-caps;
+    margin-top: -2.5em;
+}
+/* h2 { border-bottom: .5px solid #999999; } */

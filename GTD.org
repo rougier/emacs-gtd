@@ -1,0 +1,1282 @@
+# ------------------------------------------------------------------------------
+#+TITLE:     Get Things Done with Emacs
+#+SUBTITLE:  Nicolas P. Rougier - September 2020
+#+AUTHOR:    Nicolas P. Rougier
+#+EMAIL:     Nicolas.Rougier@inria.fr
+#+LANGUAGE:  en
+#+STARTUP:   content showstars indent inlineimages hideblocks
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="GTD.css" />
+#+OPTIONS:   toc:2 html-scripts:nil num:nil html-postamble:nil html-style:nil ^:nil
+# ------------------------------------------------------------------------------
+
+* Introduction
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+Before I start describing how I organize my professional life using Emacs
+and org-mode, let me introduce myself. I'm a [[https://www.labri.fr/perso/nrougier/][researcher in computational
+neuroscience]] working at the [[https://www.imn-bordeaux.org/en/][Institute of Neurodegenerative Diseases]] in
+Bordeaux (France). As such, my main tasks during a typical day are meetings
+with my PhD students (physical or online), team and grant meetings
+(physical or online), development (GitHub), reading (online), reviewing
+(online) and writing (books, papers, grants, notes, etc). I'm also
+co-founder and editor in chief for [[https://rescience.github.io/][ReScience C]] and [[http://rescience.org/x][ReScience X]] and I'm
+involved in several academic and open source projects. I receive
+approximately 100 mails and 10 GitHub notifications a day.
+
+As of September 2020, I'm supervising five PhD students (two first year,
+one second year, one third year and one finishing). I'm currently writing a
+book ([[https://github.com/rougier/scientific-visualization-book][Scientific Visualization — Python & Matplotlib]]), handling the
+simulatenous writing of 6 academic papers (at various stages), while
+preparing a SciFi festival ([[https://hypermondes.fr/][Hypermondes]]), a hackaton ([[https://github.com/reprohack/reprohack-hq][ReproHack @
+Bordeaux]]), a workshop ([[https://github.com/ReScience/ten-years][Ten Years Reproducibility Challenge]]) and a summer
+school ([[https://aspp.school/wiki/][ASPP 2021]]) to be held in Bordeaux in 2021.
+
+All these activities requires some organisation.
+
+** Get Things Done
+
+I've decided some weeks ago to (try to) adopt the method of David Allen
+named "Get Things Done" (GTD). A lot of people were giving very positive
+feedback about this method and there are a lot of related resources
+online, including several Emacs/org-mode setup. This helped me a lot to
+design my own setup since I did not read the book, but I found a nice
+[[https://todoist.com/productivity-methods/getting-things-done][summary]]:
+
+1. *Capture* anything that crosses your mind, nothing is too big or small. 
+2. *Clarify* what you’ve captured into clear and concrete action steps. 
+3. *Organize* and put everything into the right place.
+4. *Review,* update, and revise your lists.
+5. *Engage* Get to work on the important stuff.
+
+Then I read a lot of other Emacs specific resources that were incredibly
+useful but also a bit complex because people introduced their full setup
+making it difficult to understand it sometime. Since I'm still in the setup
+phase, I've decided to document the process while designing it, hoping it
+will be helpful for others.
+
+If you want to read my current full setup, just go the end of this
+document. Else, you can read each section and discover the process step by
+step. Note that this means we'll write some parts only to be rewritten
+later with some improvements, just for the sake of clarity.
+
+** About this document
+
+In all the following section, I'll suppose you're familiar with emacs (of
+course) and knows bit of org-mode. If this is not the case, you can follow
+the different links I've inserted. They point to the relevant section in
+the org-mode manual. We'll start with a Vanilla emacs without any initial
+configuration ("/emacs -q - GTD.el"/) such that you should obtain the same
+result as me. =GTD.el= will be given in each section.
+
+The address of this document is: https://www.labri.fr/perso/nrougier/GTD/index.html\\
+The sources of this document is: https://github.com/rougier/emacs-GTD
+
+** License
+
+This document has been written in org mode ([[file:GTD.org][=GTD.org=]]) using a customized
+CSS stylesheet ([[file:GTD.css][=GTD.css=)]] released (both) under a [[https://creativecommons.org/licenses/by/4.0/][CC-BY 4.0 international
+license]]. Feel free to re-use it if you like it.
+
+** Resources
+
+Here are various resources that helped me to design my workflow:
+
+- [[https://blog.jethro.dev/posts/org_mode_workflow_preview/][Org-mode Workflow: A Preview]] by Jethro Kuan (2020)
+
+  #+BEGIN_QUOTE
+  This is going to be a multi-part series on Emacs and org-mode. This is
+  also going to be a really long series, so before we begin I want to give
+  you an idea of what to expect. What I’m about to present is a workflow
+  I’ve tweaked over several years. It is a workflow that has constantly
+  evolved to adapt to my varying needs. At the time of writing, I have
+  completed 3478 todo items, and written over 29000 lines in my personal
+  knowledge base.
+  #+END_QUOTE
+
+- [[https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html][Orgmode for GTD]] by Nicolas Petton (2017)
+
+  #+BEGIN_QUOTE
+  I’ve been using Orgmode to implement the GTD methodology for the last 4
+  years. Rather than explaining the GTD methodology itself or how Orgmode
+  works, in this post I’ll detail how I use Orgmode to implement GTD.  If
+  you don’t know Orgmode and are curious about it, you should head to its
+  website first.
+  #+END_QUOTE
+
+- [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]] by Bernt Hansen (2015)
+
+  #+BEGIN_QUOTE
+  I have been using org-mode as my personal information manager for years
+  now. I started small with just the default TODO and DONE keywords. I
+  added small changes to my workflow and over time it evolved into what is
+  described by this document. I still change my workflow and try new things
+  regularly. This document describes mature workflows in my current
+  org-mode setup. I tend to document changes to my workflow 30 days after
+  implementing them (assuming they are still around at that point) so that
+  the new workflow has a chance to mature. 
+  #+END_QUOTE
+
+- [[http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html][How I use Emacs and Org-mode to implement GTD ]]by Charles Cave (2009)
+
+  #+BEGIN_QUOTE
+  "Getting Things Done" is a book by David Allen in which he describes a
+  work-life management system developed after twenty years of consulting
+  work. The promise of GTD is "Stress-free productivity" and developing a
+  calm state of mind in a state of readiness. Allen's second book, "Ready
+  for Anything" elaborates on these principles in a series of essays.  The
+  effectiveness of GTD lies in taking a complete and current inventory of
+  all your commitments, then organizing and reviewing this information
+  regularly in a systematic way. Your work and life can then be viewed from
+  different levels of detail allowing you to make choices about what to do
+  (and not do) at any moment.
+  #+END_QUOTE
+
+And of course, the [[https://orgmode.org/guide/][org-mode documentation]] helped me alot.
+  #+BEGIN_QUOTE
+  Org is a mode for keeping notes, maintaining TODO lists, and doing
+  project planning with a fast and effective plain-text system. It is also
+  an authoring and publishing system, and it supports working with source
+  code for literal programming and reproducible research.
+  #+END_QUOTE
+
+* Inbox
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+** Basic setup
+
+The first step I was interested in was a way to quickly capture any idea
+that I may have during the day. My goal was to have a non-disruptive
+process, that is, type a key sequence to enter [[https://orgmode.org/guide/Capture.html#Capture][capture mode]], type some text
+and then just forget about it. More specifically, I did not want to have to
+think where I would store this text nor thinking about any related
+information such as tags or date. I chose to store theses ideas in a
+=~/Documents/org/inbox.org= file:
+
+#+begin_src lisp
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "inbox.org"))
+#+end_src
+
+My initial =inbox.org= reads (we'll modify it later):
+
+#+begin_src org
+ #+STARTUP: content showstars indent
+ #+FILETAGS: inbox
+#+end_src
+
+The STARTUP line defines some [[https://orgmode.org/manual/In_002dbuffer-Settings.html][buffer settings]] ([[https://orgmode.org/manual/Initial-visibility.html][initial visibility]], [[https://orgmode.org/manual/Org-Indent-Mode.html][indent
+mode]] and [[https://orgmode.org/manual/Hard-indentation.html#Hard-indentation][star visibility]]) while the [[https://orgmode.org/manual/Tag-Inheritance.html][FILETAGS]] line define a common tag that
+will be inherited by all entries (=inbox= in this case).
+
+then we can setup a specific capture template for inbox:
+
+#+begin_src lisp
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))))
+#+end_src
+
+and setup a keyboard shortcut (=C-c c=):
+
+#+begin_src lisp
+(define-key global-map (kbd "C-c c") 'org-capture)
+#+end_src
+
+Note that this binding will invoke the org capture menu and to add
+something to the inbox, the full sequence is =C-c c i=. Since I intend
+to use it quite often, I prefer to have shorter bindings:
+
+#+begin_src lisp
+(defun org-capture-inbox ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil "i"))
+
+(define-key global-map (kbd "C-c i") 'org-capture-inbox)
+#+end_src
+
+** Working with mail
+
+For a long time, I've been using my mail inbox as a todo box, i.e. a
+collection of emails that call for action. Any mail that was not archived
+requested an answer in the short or long term. I doubt this is the
+recommended way of handling the inbox (but is there any?) but since I
+decided to move to GTD, it was also the opportunity to handle my mail
+differently. A few months back, I moved away from the default system email
+client on my OSX machine and started to use the almighty [[https://www.djcbsoftware.nl/code/mu/mu4e/][mu4e]] (mu for
+emacs) that provides a very smooth [[https://www.djcbsoftware.nl/code/mu/mu4e/Org_002dmode-links.html][capture integration]]. We can thus add a
+new template for quickly capturing a "Reply to" action to be filed in the
+inbox.
+
+#+begin_src lisp
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         (concat "* TODO Process \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+#+end_src
+
+We can now define a binding for headers and view mode:
+
+#+begin_src lisp
+(define-key mu4e-headers-mode-map (kbd "C-c c") 'mu4e-org-store-and-capture)
+(define-key mu4e-view-mode-map    (kbd "C-c c") 'mu4e-org-store-and-capture)
+#+end_src
+
+To register a reply action, the full sequence is thus =C-c c @=.
+Since I'm lazy, let's shorten it to =C-c i=:
+
+#+begin_src lisp
+(defun org-capture-mail ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "@"))
+
+(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+#+end_src
+
+Last thing is a small [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html][hook]] to tell org-capture to use the full window
+instead of splitting the current window. This is not mandatory at all and
+mostly depends on your taste.
+
+#+begin_src lisp
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+#+end_src
+
+** Capturing tasks
+
+Any time you want to enter something in your inbox, be it a note or
+something related to a mail, just type =C-c i= and you should see the
+following capture window:
+
+#+begin_src org
+*Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.*
+,* TODO +_+
+  /Entered on [2020-09-11 Fri 07:53]/
+#+end_src
+
+For mail related note, you don't have to do anything:
+
+#+begin_src org
+*Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.*
+,* TODO Process "Adaptive Computation Time …" +_+
+  /Entered on [2020-09-08 Tue 08:51]/
+#+end_src
+
+My inbox notes are generally short (verb + subject) because I use a daily
+review and it is generally enough information for later processing. To give
+you an idea, here is my current inbox (/2020-09-11 Fri/). Note that all the
+=Process= entries links to the relevant mail.
+
+#+begin_src org
+,#+STARTUP: content showstars indent
+,#+FILETAGS: inbox
+,* TODO Organize bibliography …
+,* TODO Process "Adaptive Computation Time …" …
+,* TODO Process "Relevant paper" …
+,* TODO Mail F.Wagner about team talk …
+,* TODO Buy "Canon printer" …
+,* TODO Process "ICDL oral presentation" …
+,* TODO Write discussion (plasticity paper) …
+,* TODO Compute VSOM δxδy representation …
+#+end_src
+
+During the review, some of these notes will be filed directly under an
+existing project, some will be split in several subtasks and some others
+will lead to the creation of a new project.
+
+** Summary 
+
+Our first (incomplete) GTD configuration is:
+
+#+HTML: <details><summary><b>GTD.el</b> (version 1)</summary>
+#+begin_src lisp
+(require 'org)
+
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "inbox.org"))
+
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         (concat "* TODO Reply to \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+
+(defun org-capture-inbox ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil "i"))
+
+(defun org-capture-mail ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "@"))
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(define-key global-map            (kbd "C-c c") 'org-capture)
+(define-key global-map            (kbd "C-c i") 'org-capture-inbox)
+
+;; Only if you use mu4e
+;; (require 'mu4e)
+;; (define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+;; (define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+#+end_src
+#+HTML: </details>
+
+The set of available commands at this point is:
+
+| Command                      | Bindings         | Mode + where           |
+|------------------------------+------------------|------------------------|
+| Capture menu                 | *C-c c*            | any                    |
+| Capture a new TODO           | *C-c i* or *C-c c i* | any                    |
+| Capture a mail-related TODO  | *C-c i* or *C-c c @* | mu4e view/headers mode |
+
+* Agenda
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+** Basic setup (I)
+
+Before heading to the review process, we need first to setup the [[https://orgmode.org/manual/Agenda-Views.html#Agenda-Views][agenda]]
+that will help us to track daily meetings and tasks. Using the previous
+inbox configuration, you can actually already have a view of your inbox
+using the =M-x org-agenda= command that will bring up a menu where you can
+choose what to display. Before using it, let me first define a new global
+key binding (=C-c a=) for quick access to the agenda:
+
+#+begin_src lisp
+(define-key global-map (kbd "C-c a") 'org-agenda)
+#+end_src
+
+No, let's see what our tasks look like by invoking the "List of All TODO
+entries" using the =t= menu (full sequence is thus =C-c a t=):
+
+#+begin_src org
+*Global list of TODO items of type: ALL*
+*Press ‘N r’ (e.g. ‘0 r’) to search again: (0)[ALL] (1)TODO (2)DONE*
+  inbox:      TODO Organize bibliography                                     /:inbox:/
+  inbox:      TODO Process "Adaptive Computation Time…"                      /:inbox:/
+  inbox:      TODO Process "Relevant paper"                                  /:inbox:/
+  inbox:      TODO Mail F.Wagner about team talk                             /:inbox:/
+  inbox:      TODO Buy "Canon printer"                                       /:inbox:/
+  inbox:      TODO Process "ICDL oral presentation"                          /:inbox:/
+  inbox:      TODO Write discution (plasticity paper)                        /:inbox:/
+  inbox:      TODO Compute VSOM δxδy representation                          /:inbox:/
+#+end_src
+
+The display of the task list is bit redundant because we have an "inbox" on
+the left and an "inbox" on the right. However, they do not have the same
+origin. The one on the left is the name of the file where the related TODO
+is stored while the one on the right is a tag. If you remember our inbox
+file setup header, there was a =#+FILETAGS: inbox= line that assign the
+"inbox" tag to each entry. Since tags are redundant, let's just remove them
+by filtering them out:
+
+#+begin_src lisp
+(setq org-agenda-hide-tags-regexp ".")
+#+end_src
+
+With this line, we actually ask the agenda to hide any tag (=.=) that may be
+present. Of course, you can choose to be more specific and hide only some
+tags, it's up to you. Now we still have to choose what to do with the left
+part displaying "inbox". This is displayed because there is no [[https://orgmode.org/manual/Categories.html][category]]
+assigned to the entry and when the agenda display a TODO item, the default
+behabior is to display the category or the filename if there is no
+category. You can of course change what is actually displayed by modifying
+the [[https://orgmode.org/manual/Presentation-and-Sorting.html][org-agenda-prefix-format]]:
+
+#+begin_src lisp
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " %i %-12:c")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c"))
+#+end_src
+
+We could also add a /#+CATEGORY: INBOX/ to the header of our inbox file but I
+prefer not to have anything displayed for now. So let's get's rid of the
+category display for todo items:
+
+#+begin_src lisp
+(setq org-agenda-prefix-format
+      '((agenda . " %i %-12:c%?-12t% s")
+        (todo   . " ")
+        (tags   . " %i %-12:c")
+        (search . " %i %-12:c"))
+#+end_src
+
+And the result is:
+
+#+begin_src org
+*Global list of TODO items of type: ALL*
+*Press ‘N r’ (e.g. ‘0 r’) to search again: (0)[ALL] (1)TODO (2)DONE*
+  TODO Organize bibliography
+  TODO Process "Adaptive Computation Time…"
+  TODO Process "Relevant paper"
+  TODO Mail F.Wagner about team talk
+  TODO Buy "Canon printer"
+  TODO Process "ICDL oral presentation"
+  TODO Write discution (plasticity paper)
+  TODO Compute VSOM δxδy representation
+#+end_src
+
+** Recurrent events
+
+Beside notes taking, I send or received a number of appointments (generally
+through mail) and I need to save them. I prefer not to file them in my
+inbox since generally I know both the topic and when they will occur such
+that I can directly store them in a dedicated =agenda.org= file that will be
+used to store all my scheduled events and meetings. Let's first add this
+new file to the list of org files:
+
+#+begin_src lisp
+(setq org-agenda-files (list "inbox.org" "agenda.org"))
+#+end_src
+
+The initial file has a basic startup header configuration and I also
+defined a set of default [[https://orgmode.org/manual/Tags.html][tags]] using the =#+TAGS= syntax. This will ease the
+assignment of tags when adding a new entry or modifying an entry (we'll
+that later):
+
+#+begin_src org
+#+STARTUP: hideall showstars indent
+#+TAGS:    event(e) meeting(m) deadline(d)
+#+TAGS:    @outside(o) @imn(i) @inria(r) @online(l) @canceled(c)
+#+end_src
+
+The structure of my agenda is split into birthdays and recurrent / past /
+future events. This quite arbitrary and you can use any a different
+structure. 
+
+#+begin_src org
+,* *Birthdays*
+,* *Recurrent*
+  ,* *Scheduled*
+  ,* *People*
+  ,* *Team*
+,* *Past*
+,* *Future*
+#+end_src
+
+Let's first start filling the birthdays part. For any yearly event such as
+birthdays, we can add special entries using the [[https://www.gnu.org/software/emacs/manual/html_node/org/Weekly_002fdaily-agenda.html][org-anniversary]] syntax
+(from the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Diary.html][diary]]).
+
+#+begin_src org
+,* *Birthdays*
+  %%(org-anniversary 1976 6  1) Emacs is %d years old
+  %%(org-anniversary 1953 3 16) Richard Stallman is %d years old
+#+end_src
+
+Each time month/day is displayed in the agenda, the corresponding text will
+be displayed as well.
+
+For the recurrent events, I make a separation between scheduled, people and
+team. In my case, scheduled events are mostly daily events and I use the
+agenda as a reminder. I could have used the [[https://orgmode.org/manual/Repeated-tasks.html][repeating tasks]] feature (using
+syntax such as /[2020-09-12 Sat 09:00 +1d]/, but the problem is that I wanted
+to have some daily repeating task only for workdays and the previous syntax
+does not offer such choice. Instead, I've used the [[https://stackoverflow.com/questions/28369833][following code]]:
+
+#+begin_src org
+,* *Recurrent*
+  ,* *Scheduled*
+    ,* *GTD Review* 18:00-18:20                                          /:review:@home:/
+      /SCHEDULED: <%%(memq (calendar-day-of-week date) '(1 2 3 4 5))>/
+    ,* *Notes cleaning* 18:20-18:30                                      /:review:@home:/
+      /SCHEDULED: <%%(memq (calendar-day-of-week date) '(1 2 3 4 5))>/
+    ,* *Agenda cleaning*                                                 /:review:@home:/
+      /SCHEDULED: <2020-09-01 Tue +1m>/
+#+end_src
+
+For recurrent events with people, I do not use the repeating task feature
+because I want to be able to cancel a specific meeting if it did not happen
+and also to use the entry for taking notes (we will see that below).
+
+#+begin_src org
+,* *Recurrent*
+  ,* *People*
+    ,* *Student A (weekly meeting)*                                           /:meeting:/
+      ,* *Student A*                                                        /:@canceled:/
+        /<2020-09-14 Mon 10:00-11:00>/
+      ,* *Student A*                                                          /:@online:/
+        /<2020-09-07 Mon 10:00-11:00>/
+      ,* *Student A*                                                             /:@imn:/
+        /<2020-09-14 Mon 10:00-11:00>/
+#+end_src
+
+For these recurrent events, I write them directly into the agenda file at
+the end of a meeting where we generally agree on next meeting. Here is
+[[https://emacs.stackexchange.com/questions/10504][quick reminder]] by [[https://emacs.stackexchange.com/users/780/glucas][Greg Lucas]] on how to enter date and their definition:
+
+- *PLAIN timestamp* (=C-c .=) :: This is used for things like appointments where
+  the entry occurs at a specific date/time. Such an entry will show up in
+  the agenda on the specified day, and will not show up after that day has
+  passed. Note that an appointment in the past won't keep showing up on
+  your agenda regardless of whether you mark it DONE: if you didn't go to
+  your doctor's appointment yesterday, that doesn't mean you still have one
+  today!
+
+- *SCHEDULED timestamp* (=C-c C-s=) :: This is used to indicate when you intend to
+  do the task. It will show up on the agenda on the scheduled day. If you
+  don't complete the task at that time, it will continue to show up on the
+  agenda on the following days to show you that you have not completed
+  something that you planned to do.
+
+- *DEADLINE timestamp* (=C-c C-d=) :: This is used to indicate when something must
+  be completed. Typically you want to see deadlines ahead of time, so that
+  you can do whatever it is that must be done to meet them. Like a
+  scheduled entry, if you miss a deadline it will continue to appear on the
+  agenda as past due.
+
+- *INACTIVE timestamp* (=C-c !=) :: This is when you want to attach a date to an
+  entry but do not want it to show up in the agenda at all. Inactive
+  timestamps have no special behavior.
+
+** Meetings & notes
+
+Now it is time to define a new capture template for registering a meeting.
+
+#+begin_src lisp
+("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+ (concat "* %? :meeting:\n"
+         "<%<%Y-%m-%d %a %H:00>>"))
+#+end_src
+
+It is not very complicated: any meeting will be filed in =agenda.org= under
+the *Future* header (and will be refiled later, during agenda review). By
+default, the timestamp is the current day with a rounded clock since my
+meetings generally starts at plain hours. When invoked, this template looks
+like:
+
+#+begin_src org
+*Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.*
+,* +_+                                                                        /:meeting:/
+  /<2020-09-11 Fri 11:00>/
+#+end_src
+
+When I enter a meeting, I generally use the name of people that will be
+present at the meeting (if there are not too many people) or the topic of
+the meeting. The goal is to have short but useful information when the
+meeting shows up in my agenda.
+
+The next step is to define a "Note" template that will be used to take
+notes during a meeting:
+
+#+begin_src lisp
+("n" "Note" entry  (file "notes.org")
+ (concat "* Note (%a)\n"
+         "/Entered on/ %U\n" "\n" "%?"))
+#+end_src
+
+We will (temporarily) store these notes in a =notes.org= dedicated file.
+Maybe you've noticed the "=%a=", in the template. This is a [[https://orgmode.org/manual/Template-expansion.html#Template-expansion][template
+extension]] that will be resolved to the content created with the
+*org-store-link* command. However, if you capture a note while your cursor is
+on the same line of an agenda entry, the content will be filled with this
+entry. This is super convenient to link your note with the agenda entry.
+
+My initial =notes.org= is as follows:
+
+#+begin_src org
+#+STARTUP: content showstars indent
+#+FILETAGS: notes
+#+end_src
+
+Nothing fancy here since it is actually a temporary storage, notes will be
+later moved to the relevant project they belong to.
+
+** Summary 
+
+Here is our updated configuration:
+
+#+HTML: <details><summary><b>GTD.el</b> (version 2)</summary>
+#+begin_src lisp
+(require 'org)
+
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "inbox.org" "agenda.org" "notes.org"))
+
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+         (concat "* %? :meeting:\n"
+                 "<%<%Y-%m-%d %a %H:00>>"))
+        ("n" "Note" entry  (file "notes.org")
+         (concat "* Note (%a)\n"
+                 "/Entered on/ %U\n" "\n" "%?"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         (concat "* TODO Reply to \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+
+(defun org-capture-inbox ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil "i"))
+
+(defun org-capture-mail ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "@"))
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(define-key global-map            (kbd "C-c a") 'org-agenda)
+(define-key global-map            (kbd "C-c c") 'org-capture)
+(define-key global-map            (kbd "C-c i") 'org-capture-inbox)
+
+;; Only if you use mu4e
+;; (require 'mu4e)
+;; (define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+;; (define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+#+end_src
+#+HTML: </details>
+
+The set of available commands is now:
+
+| Command                          | Bindings         | Mode + where           |
+|----------------------------------+------------------|------------------------|
+| Agenda                           | *C-c a*            | any                    |
+| Agenda for today                 | *C-c a a*          | any                    |
+|                                  |                  |                        |
+| Capture menu                     | *C-c c*            | any                    |
+| Capture meeting (agenda.org)     | *C-c c m*          | any                    |
+| Capture meeting note (notes.org) | *C-c c n*          | any                    |
+| Capture generic TODO (inbox.org) | *C-c i* or *C-c c i* | any                    |
+| Capture mail TODO (inbox.org)    | *C-c i* or *C-c c @* | mu4e view/headers mode |
+|                                  |                  |                        |
+| Add/Remove tag                   | *C-c C-c*          | org-mode on headline   |
+|                                  |                  |                        |
+| Plain timestamp                  | *C-c .*            | org-mode               |
+| Scheduled timestamp              | *C-c s*            | org-mode               |
+| Deadline timestamp               | *C-c d*            | org-mode               |
+| Inactive timestamp               | *C-c !*            | org-mode               |
+
+* Review
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+The actual review process is probably the less documented aspect of GTD
+from all the resources I've read so far. When it is mentioned, some people
+explain they have a weekly review while some others uses a daily review. To
+get things further complicated, it is not clear if this process is a matter
+of a few minutes or a matter of hours. My personal point of view so far
+(and this may change in the future) is that a daily process is probably the
+way to go in my case since I'm adding from 5 to 10 entries to my inbox
+each day (mail included). For me, the end of the work day seems to be the
+best time to do the review since my memory is still fresh with things I've
+done during the day, and what may come next for each project.
+
+** Basic setup
+
+My review process consists mostly in moving things out of the inbox in
+order to file them in the corresponding project if it exists or to create
+one if this is not the case. To do that, we need first to create a new
+=projects.org= file that will hold all our projects. The structure of this
+file is quite important because you'll interact with it a lot of times. I
+chose to split first my projects into global categories:
+
+#+begin_src org
+,#+STARTUP: content showstars indent
+,* *Students*                                                                /:students:/
+,* *Team*                                                                        /:team:/
+,* *Collaboratorive projects*                                   /:collaborative:project:/
+,* *Events organization*                                                       /:events:/
+,* *Academic papers*                                                          /:article:/
+,* *Personal projects*                                               /:personal:project:/
+,* *ReScience*                                                              /:rescience:/
+,* *Home*                                                                        /:home:/
+#+end_src
+
+I then add projects under one of these categories using a specific
+structure. Let me show you a typical student "project":
+
+#+begin_src org
+,* *Students*                                                                /:students:/
+  ,* *J.Doe (PhD)* [/]                                                      /:phd:j.doe:/
+    /:PROPERTIES:/
+    /:CATEGORY: J.DOE/
+    /:VISIBILITY: hide/
+    /:COOKIE_DATA: recursive todo/
+    /:END:/
+    ,* *Information*                                                             /:info:/
+      /:PROPERTIES:/
+      /:VISIBILITY: hide/
+      /:END:/
+    ,* *Notes*                                                                  /:notes:/
+      /:PROPERTIES:/
+      /:VISIBILITY: hide/
+      /:END:/
+    ,* *Tasks*                                                                  /:tasks:/
+      /:PROPERTIES:/
+      /:VISIBILITY: content/
+      /:END:/
+#+end_src
+
+The *information* section contains information related to the project and
+you're free to organize the way you want. The *notes* section is where I move
+meeting notes related to this project during my notes review. Finally, the
+*tasks* is where I will move related inbox entries. I also set different
+[[https://orgmode.org/manual/Initial-visibility.html][visibility]] properties for each section: information and notes are hidden
+while tasks section is open. You might have also noticed the [[https://orgmode.org/manual/Breaking-Down-Tasks.html][COOKIE_DATA]]
+property at the top and the =[/]= at the end of the project name. These two
+components will help us to track the number of pending tasks vs the number
+of completed tasks. Each time we'll move a task from the *TODO* state to the
+*DONE* state, the header will be updated accordingly (you can also refresh it
+with =C-c C-c= when the cursor is over it).
+
+The overall number of projects is very dependent on you. In my case, I've
+about 40 opened projects. Some will last a few months (e.g. academic
+papers), some will last a few years (e.g. grants and phd students) and some
+others do not have foreseeable end (house, garden, car).
+
+** Moving things
+
+Before refiling inbox entries into projects, I usually try to set an
+estimated time (effort) needed to complete the tasks as well as some
+contextual information (using tags). To ease the process, we'll first
+modify the inbox header to add typical estimated efforts and some tags that
+will speed the overall processing of each entry.
+
+#+begin_src org
+,#+STARTUP: content showstars indent
+,#+TAGS: @home(h) @work(w) @mail(m) @comp(c) @web(b) 
+,#+PROPERTY: Effort_ALL 0 0:05 0:10 0:15 0:30 0:45 1:00 2:00 4:00
+#+end_src
+
+Before refiling (i.e. moving) an entry, I will set some tags using the =C-c
+C-c= keybinding and if the entry is an atomic task (i.e. that can be done
+independently of any others tasks), I'll assign an [[https://orgmode.org/manual/Effort-Estimates.html][estimated effort]] using
+the existing =C-c C-x e= key binding. For example, let's consider the
+following entry before review:
+
+#+begin_src org
+,* TODO Write review section (GTD.org)
+  /Entered on [2020-09-12 Sat 09:20]/
+#+end_src
+
+After having set effort and tags, the entry reads:
+
+#+begin_src org
+,* TODO Write review section (GTD.org)                                        :@comp:
+  /:PROPERTIES:/
+  /:Effort:   0:30/
+  /:END:/
+  /Entered on [2020-09-12 Sat 09:20]/
+#+end_src
+
+Tags are supposed to give some contextual information on where the task can
+be completed. However, I did not really use them partly due to the 2020
+sanitary crisis that tends to blur the line between work and home. Setting
+the estimated is however quite important for me because when I'll activate
+a task, the estimated effort will be displayed in the agenda and will help
+me to decide if I can engage in task depending on the amount of free time I
+have. This is especially useful for small tasks (5 minutes) that can be
+completed any time.
+
+Now it's time to move the entry.
+
+I explained that inbox entries have to be moved into the relevant project
+under the *Tasks* headline. To do that, we'll use the [[https://orgmode.org/manual/Refile-and-Copy.html#Refile-and-Copy][org-refile]] function
+(bound to =C-c C-w= when on a headline) and specify where the entry can be
+refiled in the =projetcs.org=. If your remember, we also have notes that
+needs to be refiled in projects such that targets in =projects.org= are
+either *Notes* or *Tasks*. We thus need to define a refile target using
+regexp. One easy way to do that is to use the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regexp-Functions.html][regexp-opt]] function:
+
+#+begin_src lisp
+(regexp-opt '("Tasks" "Notes"))
+#+end_src
+
+You can evaluate the expression by placing the cursor at the end of the
+line and type =C-u C-x C-e=. The optimized regex
+(~"\\(?:\\(?:Note\\|Task\\)s\\)"~) should appear at the end of the line. We
+can now use it so specifiy our targets:
+
+#+begin_src lisp
+(setq org-refile-targets
+      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
+#+end_src
+
+Last step is to tell org-mode we want to specify a refile target using the
+file path.
+
+#+begin_src lisp
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+#+end_src
+
+To refile a J.Doe related inbox entry, you can then type:
+
+#+begin_example
+C-c C-w + "J.Doe" + tab + "T" + tab
+#+end_example
+
+and this will be resolved to ="projects.org/Students/J.Doe/Tasks"=.
+
+** Activating tasks
+
+After having emptied the inbox, it's time to have a look at the different
+projects to decide what are the next tasks to be activated. Before doing
+that, we need to define what is an active task. Org-mode defines [[https://orgmode.org/manual/TODO-Basics.html][two
+different states]] for *TODO* items: *TODO* and *DONE*. We need to modify this in
+order to introduce two new non-terminal state: *NEXT* to express this is the
+next task to be completed and *HOLD* to express this task is on hold (for
+whaterver reason):
+
+#+begin_src lisp
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
+#+end_src
+
+Thanks to [[https://emacs.stackexchange.com/questions/35751][Erik Anderson]], we can also add a hook that will log when we
+activate a task by creating an "ACTIVATED" property the first time the task
+enters the *NEXT* state:
+
+#+begin_src lisp
+(defun log-todo-next-creation-date (&rest ignore)
+  "Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
+  (when (and (string= (org-get-todo-state) "NEXT")
+             (not (org-entry-get nil "ACTIVATED")))
+    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+#+end_src
+
+We'll see in the next section how to exploit this property. Next step is to
+[[https://orgmode.org/manual/Checkboxes.html][update the trailing]] =[/]= behind each headline. To do that, you can type =C-u
+C-c #=. For each projects, you now have something like =[x/y]= where x is the
+number of closed tasks and y is the total number of tasks. Any project with
+x < y means that there are some tasks that can be activated. You can now
+selectively open a project and decide if you want to activate one of the
+non closed task. The most easy way to do that is to go over the TODO
+keyword and use =S-right= to advance to the *NEXT* state.
+
+** Summary
+
+Here is our updated configuration:
+
+#+HTML: <details><summary><b>GTD.el</b> (version 3)</summary>
+#+begin_src lisp
+(require 'org)
+
+;; Files
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "inbox.org" "agenda.org" "notes.org"))
+
+;; Capture
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+         (concat "* %? :meeting:\n"
+                 "<%<%Y-%m-%d %a %H:00>>"))
+        ("n" "Note" entry  (file "notes.org")
+         (concat "* Note (%a)\n"
+                 "/Entered on/ %U\n" "\n" "%?"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         (concat "* TODO Reply to \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+
+(defun org-capture-inbox ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil "i"))
+
+(defun org-capture-mail ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "@"))
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+;; Key bindings
+(define-key global-map            (kbd "C-c a") 'org-agenda)
+(define-key global-map            (kbd "C-c c") 'org-capture)
+(define-key global-map            (kbd "C-c i") 'org-capture-inbox)
+
+;; Only if you use mu4e
+;; (require 'mu4e)
+;; (define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+;; (define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+
+;; Refile
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-targets
+      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
+
+;; TODO
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
+(defun log-todo-next-creation-date (&rest ignore)
+  "Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
+  (when (and (string= (org-get-todo-state) "NEXT")
+             (not (org-entry-get nil "ACTIVATED")))
+    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+#+end_src
+#+HTML: </details>
+
+
+The set of available commands is now:
+
+| Command                          | Bindings         | Mode + where           |
+|----------------------------------+------------------|------------------------|
+| Agenda                           | *C-c a*            | any                    |
+| Agenda for today                 | *C-c a a*          | any                    |
+|                                  |                  |                        |
+| Capture menu                     | *C-c c*            | any                    |
+| Capture meeting (agenda.org)     | *C-c c m*          | any                    |
+| Capture meeting note (notes.org) | *C-c c n*          | any                    |
+| Capture generic TODO (inbox.org) | *C-c i* or *C-c c i* | any                    |
+| Capture mail TODO (inbox.org)    | *C-c i* or *C-c c @* | mu4e view/headers mode |
+|                                  |                  |                        |
+| Add/Remove tag                   | *C-c C-c*          | org-mode on headline   |
+| Update progress indicator        | *C-c C-c*          | org-mode on [/]        |
+| Update all progress indicators   | *C-u C-c #*        | org-mode               |
+| Enter estimated effort           | *C-c C-x e*        | org-mode on headline   |
+| Refile section                   | *C-c C-w*          | org-mode on headline   |
+| Move to next TODO state          | *S-right*          | org-mode on TODO       |
+|                                  |                  |                        |
+| Plain timestamp                  | *C-c .*            | org-mode               |
+| Scheduled timestamp              | *C-c s*            | org-mode               |
+| Deadline timestamp               | *C-c d*            | org-mode               |
+| Inactive timestamp               | *C-c !*            | org-mode               |
+
+* Doing things
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+** Agenda setup (II)
+
+It's now time to work on custom agenda view that will display meetings for
+the day, task that need to be done and deadlines. We'all also add the
+content of the inbox ad a reminder to file entries, and the tasks we've
+completed today. So overall, our custom agenda headers will be:
+
+#+begin_src org
+*Day-agenda (W37):* …
+*Sunday 13 September 2020* …
+*Tasks* …
+*Deadlines* …
+*Inbox* …
+*Completed today* …
+#+end_src
+
+Let's write a new agenda customn command (=g=) using the
+[[https://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.html][org-custom-agenda-commands]] variable.
+
+#+begin_src lisp
+(setq org-agenda-custom-commands
+      '(("g" "Get Things Done (GTD)"
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo "NEXT"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nTasks\n")))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date "")
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
+                   (org-agenda-overriding-header "\nDeadlines")))
+          (tags-todo "inbox"
+                     ((org-agenda-prefix-format "  %?-12t% s")
+                      (org-agenda-overriding-header "\nInbox\n")))
+          (tags "CLOSED>=\"<today>\""
+                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+#+end_src
+
+I won't detail every line because you'll find a lot of information online,
+in the documentation and inside emacs as well.
+
+#+HTML: <details open><summary>Agenda view (2020-09-13)</summary>
+#+begin_src org
+*Day-agenda (W37):*
+
+*Sunday 13 September 2020*
+
+   8:00......   ----------------
+   8:45- 9:00   Scheduled:  Keyboard training 
+  10:00......   ----------------
+  12:00......   ----------------
+  14:00......   ----------------
+  *14:19......*   *> now <*
+  16:00......   ----------------
+  18:00......   ----------------
+  20:00......   ----------------
+  Sched.12x:  Agenda cleaning
+
+*Tasks*
+
+   VIZBOOK:       [0:30] NEXT Organize book writing          (4d.)
+   RESCIENCE-X:   [0:30] NEXT ReScience X DOI registrar      (4d.)
+   DNFSOM:        [0:20] NEXT [#A] Read section 4 on DNFSOM  (2d.)
+   X.YYYYY:       [0:05] NEXT Mail X.Yyyyy (PhD)             (1d.)
+
+*Deadlines*
+
+   3 d. ago:  NEXT [#A] Read /"Chapitre RNN 2020-09-08"/       (4d.)
+   3 d. ago:  NEXT [#A] Read /"Chapitre WMEXP 2020-09-08]]"/   (4d.)
+
+*Inbox*
+
+  TODO Organize bibliography
+  TODO Read to /"Adaptive Computation Time for Recurrent Neural Networks"/
+  TODO Process /"Relevant paper"/
+  TODO Mail X.Yyyyy about team talk
+  TODO Buy /"Canon printer"/
+  TODO Process /"ICDL oral presentation"/
+  TODO Write discution (plasticity paper)
+  TODO Compute VSOM δxδy representation
+  TODO Process /"Internships for Students at Ecole Polytechnique"/
+
+*Completed today*
+ 
+  DONE Write GTD Review section
+
+#+end_src
+#+HTML: </details>
+
+You can see that entries in the *Task* section display a duration in front of
+the description. May you've guessed that this duration corresponds to the
+estimated effort we entered during the review process. Now, each time you
+have some free time ahead, you can which task you want to engage based on
+this estimation. Very convenient.
+
+** Completing a task
+
+Once you've chosen a task to do, and before starting the task, you can
+choose to log the time it will actually take to complete the task such that
+you can later refine your estimation. Just type *C-c C-x i* (clock in) to
+start the clock and *C-c C-x o* (clock out) to stop the clock and to add the
+duration in the logbook. Once a task is completed, you can change its state
+from *NEXT* to *DONE* (using *S-right* while the cursor is over the *NEXT*
+word). In order to keep track of when the task was completed, we can ask
+org-mode to log that:
+
+#+begin_src lisp
+(setq org-log-done 'time)
+#+end_src
+
+This will add a CLOSED: [2020-09-13 Sun 19:24] line under the corresponding
+entry. Using this time, we can thus diplay the tasks that have been
+completed during the day (see the last line of our agenda custom commands).
+
+To summarize, for a given task:
+
+#+begin_src org
+,* TODO Some task
+  /Entered on [2020-09-13 Sun 19:23]/
+#+end_src
+
+hIt will be first modified be when the estimated effort is set:
+
+#+begin_src org
+,* TODO Some task
+  /:PROPERTIES:/
+  /:EFFORT: 0:30/
+  /:END:/
+  /Entered on [2020-09-13 Sun 19:23]/
+#+end_src
+
+and further modified when activated:
+
+#+begin_src org
+,* NEXT Some task
+  /:PROPERTIES:/
+  /:EFFORT: 0:30/
+  /:ACTIVATED: [2020-09-13 Sun]/
+  /:END:/
+  /Entered on [2020-09-13 Sun 19:23]/
+#+end_src
+
+Finally, once completed, we have:
+
+#+begin_src org
+,* DONE Some task
+  /CLOSED: [2020-09-13 Sun 20:14]/
+  /:PROPERTIES:/
+  /:EFFORT: 0:30/
+  /:ACTIVATED: [2020-08-30]/
+  /:END:/
+  /:LOGBOOK:/
+  /CLOCK: [2020-09-13 Sun 19:55]--[2020-09-13 Sun 20:14] => 0:19/
+  /:END:/
+  /Entered on [2020-09-13 Sun 19:23]/
+#+end_src
+
+Next time we have to estimate the effort for this specific task, and based
+on the above log, we'll probably set it to 20 minutes instead of 30.
+
+** Summary
+
+Our final configuration is thus
+
+#+HTML: <details><summary><b>GTD.el</b> (version 4)</summary>
+#+begin_src lisp
+(require 'org)
+
+;; Files
+(setq org-directory "~/Documents/org")
+(setq org-agenda-files (list "inbox.org" "agenda.org"
+                             "notes.org" "projects.org"))
+
+;; Capture
+(setq org-capture-templates
+      '(("i" "Inbox" entry  (file "inbox.org")
+         (concat "* TODO %?\n"
+                 "/Entered on/ %U"))
+        ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
+         (concat "* %? :meeting:\n"
+                 "<%<%Y-%m-%d %a %H:00>>"))
+        ("n" "Note" entry  (file "notes.org")
+         (concat "* Note (%a)\n"
+                 "/Entered on/ %U\n" "\n" "%?"))
+        ("@" "Inbox [mu4e]" entry (file "inbox.org")
+         (concat "* TODO Reply to \"%a\" %?\n"
+                 "/Entered on/ %U"))))
+
+(defun org-capture-inbox ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil "i"))
+
+(defun org-capture-mail ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil "@"))
+
+;; Use full window for org-capture
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+;; Key bindings
+(define-key global-map            (kbd "C-c a") 'org-agenda)
+(define-key global-map            (kbd "C-c c") 'org-capture)
+(define-key global-map            (kbd "C-c i") 'org-capture-inbox)
+
+;; Only if you use mu4e
+;; (require 'mu4e)
+;; (define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)
+;; (define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)
+
+;; Refile
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-targets
+      '(("projects.org" :regexp . "\\(?:\\(?:Note\\|Task\\)s\\)")))
+
+;; TODO
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "HOLD(h)" "|" "DONE(d)")))
+(defun log-todo-next-creation-date (&rest ignore)
+  "Log NEXT creation time in the property drawer under the key 'ACTIVATED'"
+  (when (and (string= (org-get-todo-state) "NEXT")
+             (not (org-entry-get nil "ACTIVATED")))
+    (org-entry-put nil "ACTIVATED" (format-time-string "[%Y-%m-%d]"))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+;; Agenda
+(setq org-agenda-custom-commands
+      '(("g" "Get Things Done (GTD)"
+         ((agenda ""
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo "NEXT"
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format "  %i %-12:c [%e] ")
+                 (org-agenda-overriding-header "\nTasks\n")))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date "")
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp "\\* NEXT"))
+                   (org-agenda-overriding-header "\nDeadlines")))
+          (tags-todo "inbox"
+                     ((org-agenda-prefix-format "  %?-12t% s")
+                      (org-agenda-overriding-header "\nInbox\n")))
+          (tags "CLOSED>=\"<today>\""
+                ((org-agenda-overriding-header "\nCompleted today\n")))))))
+#+end_src
+#+HTML: </details>
+
+
+The set of available commands is now:
+
+| Command                          | Bindings         | Mode + where           |
+|----------------------------------+------------------|------------------------|
+| Agenda                           | *C-c a*            | any                    |
+| Agenda for today                 | *C-c a a*          | any                    |
+|                                  |                  |                        |
+| Capture menu                     | *C-c c*            | any                    |
+| Capture meeting (agenda.org)     | *C-c c m*          | any                    |
+| Capture meeting note (notes.org) | *C-c c n*          | any                    |
+| Capture generic TODO (inbox.org) | *C-c i* or *C-c c i* | any                    |
+| Capture mail TODO (inbox.org)    | *C-c i* or *C-c c @* | mu4e view/headers mode |
+|                                  |                  |                        |
+| Add/Remove tag                   | *C-c C-c*          | org-mode on headline   |
+| Update progress indicator        | *C-c C-c*          | org-mode on [/]        |
+| Update all progress indicators   | *C-u C-c #*        | org-mode               |
+| Enter estimated effort           | *C-c C-x e*        | org-mode on headline   |
+| Refile section                   | *C-c C-w*          | org-mode on headline   |
+| Move to next TODO state          | *S-right*          | org-mode on TODO       |
+|                                  |                  |                        |
+| Clock in                         | *C-c C-x i*        | org-mode on headline   |
+| Clock out                        | *C-c C-x o*        | org-mode on headline   |
+|                                  |                  |                        |
+| Plain timestamp                  | *C-c .*            | org-mode               |
+| Scheduled timestamp              | *C-c s*            | org-mode               |
+| Deadline timestamp               | *C-c d*            | org-mode               |
+| Inactive timestamp               | *C-c !*            | org-mode               |
+
+* Conclusion
+#+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+I'm now done describing my GTD setup and I hope it will be useful for some
+readers. I'm rather new to GTD and there are certainly better ways to
+implement GTD (see [[*Resources]]) and probably I'll modify some parts in the
+future.
+
+If you spot errors or typos, feel free to open an issue at
+https://github.com/rougier/emacs-GTD. 
+
+** Going further
+
+As explained in the introduction, there are plenty of resources online
+regarding org-mode in general and GTD with org-mode in particular. There
+are also plenty of interactive places where you ask for help and find some
+code:
+
+- [[https://emacs.stackexchange.com/questions/tagged/org-mode][Emacs Stack Exchange]] 
+- [[https://webchat.freenode.net/][IRC freenode]] (#org-mode) 
+- [[https://www.reddit.com/r/orgmode/][Reddit]] (orgmode)
+- [[https://lists.gnu.org/mailman/listinfo/emacs-orgmode][Mailing list]]
+
+* Local Variables                                                    :noexport:
+# Local Variables:
+# fill-column: 75
+# org-html-link-org-files-as-html: nil
+# eval: (face-remap-add-relative 'org-level-2 '(face-strong face-salient))
+# eval: (face-remap-add-relative 'org-level-3 '(face-salient default))
+# eval: (face-remap-add-relative 'org-level-4 '(default))
+# End:
+

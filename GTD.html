@@ -1,0 +1,2041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-09-14 Mon 07:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Get Things Done with Emacs</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Nicolas P. Rougier" />
+<link rel="stylesheet" type="text/css" href="GTD.css" />
+</head>
+<body>
+<div id="content">
+<h1 class="title">Get Things Done with Emacs
+<br />
+<span class="subtitle">Nicolas P. Rougier - September 2020</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd90ee23">Introduction</a>
+<ul>
+<li><a href="#org3e6e92c">Get Things Done</a></li>
+<li><a href="#orgd68c131">About this document</a></li>
+<li><a href="#org68d5da6">License</a></li>
+<li><a href="#org9070d2a">Resources</a></li>
+</ul>
+</li>
+<li><a href="#org254b6c4">Inbox</a>
+<ul>
+<li><a href="#orgb07a87a">Basic setup</a></li>
+<li><a href="#org71e92df">Working with mail</a></li>
+<li><a href="#orgc1a2f5e">Capturing tasks</a></li>
+<li><a href="#org2e94921">Summary</a></li>
+</ul>
+</li>
+<li><a href="#org63c12ab">Agenda</a>
+<ul>
+<li><a href="#org8921d9b">Basic setup (I)</a></li>
+<li><a href="#org40e4c6f">Recurrent events</a></li>
+<li><a href="#orgc5cd1ca">Meetings &amp; notes</a></li>
+<li><a href="#org7afb7bd">Summary</a></li>
+</ul>
+</li>
+<li><a href="#org471694e">Review</a>
+<ul>
+<li><a href="#org5e589b9">Basic setup</a></li>
+<li><a href="#org2dd97eb">Moving things</a></li>
+<li><a href="#orgbcbb183">Activating tasks</a></li>
+<li><a href="#org5394429">Summary</a></li>
+</ul>
+</li>
+<li><a href="#org982c154">Doing things</a>
+<ul>
+<li><a href="#org80b7b81">Agenda setup (II)</a></li>
+<li><a href="#org52a364d">Completing a task</a></li>
+<li><a href="#orga8482d6">Summary</a></li>
+</ul>
+</li>
+<li><a href="#orga7613f9">Conclusion</a>
+<ul>
+<li><a href="#orge5a75a5">Going further</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd90ee23" class="outline-2">
+<h2 id="orgd90ee23">Introduction</h2>
+<div class="outline-text-2" id="text-orgd90ee23">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+<p>
+Before I start describing how I organize my professional life using Emacs
+and org-mode, let me introduce myself. I'm a <a href="https://www.labri.fr/perso/nrougier/">researcher in computational
+neuroscience</a> working at the <a href="https://www.imn-bordeaux.org/en/">Institute of Neurodegenerative Diseases</a> in
+Bordeaux (France). As such, my main tasks during a typical day are meetings
+with my PhD students (physical or online), team and grant meetings
+(physical or online), development (GitHub), reading (online), reviewing
+(online) and writing (books, papers, grants, notes, etc). I'm also
+co-founder and editor in chief for <a href="https://rescience.github.io/">ReScience C</a> and <a href="http://rescience.org/x">ReScience X</a> and I'm
+involved in several academic and open source projects. I receive
+approximately 100 mails and 10 GitHub notifications a day.
+</p>
+
+<p>
+As of September 2020, I'm supervising five PhD students (two first year,
+one second year, one third year and one finishing). I'm currently writing a
+book (<a href="https://github.com/rougier/scientific-visualization-book">Scientific Visualization — Python &amp; Matplotlib</a>), handling the
+simulatenous writing of 6 academic papers (at various stages), while
+preparing a SciFi festival (<a href="https://hypermondes.fr/">Hypermondes</a>), a hackaton (<a href="https://github.com/reprohack/reprohack-hq">ReproHack @
+Bordeaux</a>), a workshop (<a href="https://github.com/ReScience/ten-years">Ten Years Reproducibility Challenge</a>) and a summer
+school (<a href="https://aspp.school/wiki/">ASPP 2021</a>) to be held in Bordeaux in 2021.
+</p>
+
+<p>
+All these activities requires some organisation.
+</p>
+</div>
+
+<div id="outline-container-org3e6e92c" class="outline-3">
+<h3 id="org3e6e92c">Get Things Done</h3>
+<div class="outline-text-3" id="text-org3e6e92c">
+<p>
+I've decided some weeks ago to (try to) adopt the method of David Allen
+named "Get Things Done" (GTD). A lot of people were giving very positive
+feedback about this method and there are a lot of related resources
+online, including several Emacs/org-mode setup. This helped me a lot to
+design my own setup since I did not read the book, but I found a nice
+<a href="https://todoist.com/productivity-methods/getting-things-done">summary</a>:
+</p>
+
+<ol class="org-ol">
+<li><b>Capture</b> anything that crosses your mind, nothing is too big or small.</li>
+<li><b>Clarify</b> what you’ve captured into clear and concrete action steps.</li>
+<li><b>Organize</b> and put everything into the right place.</li>
+<li><b>Review,</b> update, and revise your lists.</li>
+<li><b>Engage</b> Get to work on the important stuff.</li>
+</ol>
+
+<p>
+Then I read a lot of other Emacs specific resources that were incredibly
+useful but also a bit complex because people introduced their full setup
+making it difficult to understand it sometime. Since I'm still in the setup
+phase, I've decided to document the process while designing it, hoping it
+will be helpful for others.
+</p>
+
+<p>
+If you want to read my current full setup, just go the end of this
+document. Else, you can read each section and discover the process step by
+step. Note that this means we'll write some parts only to be rewritten
+later with some improvements, just for the sake of clarity.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd68c131" class="outline-3">
+<h3 id="orgd68c131">About this document</h3>
+<div class="outline-text-3" id="text-orgd68c131">
+<p>
+In all the following section, I'll suppose you're familiar with emacs (of
+course) and knows bit of org-mode. If this is not the case, you can follow
+the different links I've inserted. They point to the relevant section in
+the org-mode manual. We'll start with a Vanilla emacs without any initial
+configuration ("<i>emacs -q - GTD.el"</i>) such that you should obtain the same
+result as me. <code>GTD.el</code> will be given in each section.
+</p>
+
+<p>
+The address of this document is: <a href="https://www.labri.fr/perso/nrougier/GTD/index.html">https://www.labri.fr/perso/nrougier/GTD/index.html</a><br />
+The sources of this document is: <a href="https://github.com/rougier/emacs-GTD">https://github.com/rougier/emacs-GTD</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org68d5da6" class="outline-3">
+<h3 id="org68d5da6">License</h3>
+<div class="outline-text-3" id="text-org68d5da6">
+<p>
+This document has been written in org mode (<a href="GTD.org"><code>GTD.org</code></a>) using a customized
+CSS stylesheet (<a href="GTD.css"><code>GTD.css</code>)</a> released (both) under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0 international
+license</a>. Feel free to re-use it if you like it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9070d2a" class="outline-3">
+<h3 id="org9070d2a">Resources</h3>
+<div class="outline-text-3" id="text-org9070d2a">
+<p>
+Here are various resources that helped me to design my workflow:
+</p>
+
+<ul class="org-ul">
+<li><p>
+<a href="https://blog.jethro.dev/posts/org_mode_workflow_preview/">Org-mode Workflow: A Preview</a> by Jethro Kuan (2020)
+</p>
+
+<blockquote>
+<p>
+This is going to be a multi-part series on Emacs and org-mode. This is
+also going to be a really long series, so before we begin I want to give
+you an idea of what to expect. What I’m about to present is a workflow
+I’ve tweaked over several years. It is a workflow that has constantly
+evolved to adapt to my varying needs. At the time of writing, I have
+completed 3478 todo items, and written over 29000 lines in my personal
+knowledge base.
+</p>
+</blockquote></li>
+
+<li><p>
+<a href="https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html">Orgmode for GTD</a> by Nicolas Petton (2017)
+</p>
+
+<blockquote>
+<p>
+I’ve been using Orgmode to implement the GTD methodology for the last 4
+years. Rather than explaining the GTD methodology itself or how Orgmode
+works, in this post I’ll detail how I use Orgmode to implement GTD.  If
+you don’t know Orgmode and are curious about it, you should head to its
+website first.
+</p>
+</blockquote></li>
+
+<li><p>
+<a href="http://doc.norang.ca/org-mode.html">Org Mode - Organize Your Life In Plain Text!</a> by Bernt Hansen (2015)
+</p>
+
+<blockquote>
+<p>
+I have been using org-mode as my personal information manager for years
+now. I started small with just the default TODO and DONE keywords. I
+added small changes to my workflow and over time it evolved into what is
+described by this document. I still change my workflow and try new things
+regularly. This document describes mature workflows in my current
+org-mode setup. I tend to document changes to my workflow 30 days after
+implementing them (assuming they are still around at that point) so that
+the new workflow has a chance to mature. 
+</p>
+</blockquote></li>
+
+<li><p>
+<a href="http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html">How I use Emacs and Org-mode to implement GTD </a>by Charles Cave (2009)
+</p>
+
+<blockquote>
+<p>
+"Getting Things Done" is a book by David Allen in which he describes a
+work-life management system developed after twenty years of consulting
+work. The promise of GTD is "Stress-free productivity" and developing a
+calm state of mind in a state of readiness. Allen's second book, "Ready
+for Anything" elaborates on these principles in a series of essays.  The
+effectiveness of GTD lies in taking a complete and current inventory of
+all your commitments, then organizing and reviewing this information
+regularly in a systematic way. Your work and life can then be viewed from
+different levels of detail allowing you to make choices about what to do
+(and not do) at any moment.
+</p>
+</blockquote></li>
+</ul>
+
+<p>
+And of course, the <a href="https://orgmode.org/guide/">org-mode documentation</a> helped me alot.
+</p>
+<blockquote>
+<p>
+Org is a mode for keeping notes, maintaining TODO lists, and doing
+project planning with a fast and effective plain-text system. It is also
+an authoring and publishing system, and it supports working with source
+code for literal programming and reproducible research.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org254b6c4" class="outline-2">
+<h2 id="org254b6c4">Inbox</h2>
+<div class="outline-text-2" id="text-org254b6c4">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+</div>
+
+<div id="outline-container-orgb07a87a" class="outline-3">
+<h3 id="orgb07a87a">Basic setup</h3>
+<div class="outline-text-3" id="text-orgb07a87a">
+<p>
+The first step I was interested in was a way to quickly capture any idea
+that I may have during the day. My goal was to have a non-disruptive
+process, that is, type a key sequence to enter <a href="https://orgmode.org/guide/Capture.html#Capture">capture mode</a>, type some text
+and then just forget about it. More specifically, I did not want to have to
+think where I would store this text nor thinking about any related
+information such as tags or date. I chose to store theses ideas in a
+<code>~/Documents/org/inbox.org</code> file:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-directory <span class="org-string">"~/Documents/org"</span>)
+(setq org-agenda-files (list <span class="org-string">"inbox.org"</span>))
+</pre>
+</div>
+
+<p>
+My initial <code>inbox.org</code> reads (we'll modify it later):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: content showstars indent</span>
+<span class="org-org-meta-line">#+FILETAGS: inbox</span>
+</pre>
+</div>
+
+<p>
+The STARTUP line defines some <a href="https://orgmode.org/manual/In_002dbuffer-Settings.html">buffer settings</a> (<a href="https://orgmode.org/manual/Initial-visibility.html">initial visibility</a>, <a href="https://orgmode.org/manual/Org-Indent-Mode.html">indent
+mode</a> and <a href="https://orgmode.org/manual/Hard-indentation.html#Hard-indentation">star visibility</a>) while the <a href="https://orgmode.org/manual/Tag-Inheritance.html">FILETAGS</a> line define a common tag that
+will be inherited by all entries (<code>inbox</code> in this case).
+</p>
+
+<p>
+then we can setup a specific capture template for inbox:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+</pre>
+</div>
+
+<p>
+and setup a keyboard shortcut (<code>C-c c</code>):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(define-key global-map (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
+</pre>
+</div>
+
+<p>
+Note that this binding will invoke the org capture menu and to add
+something to the inbox, the full sequence is <code>C-c c i</code>. Since I intend
+to use it quite often, I prefer to have shorter bindings:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil <span class="org-string">"i"</span>))
+
+(define-key global-map (kbd <span class="org-string">"C-c i"</span>) 'org-capture-inbox)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org71e92df" class="outline-3">
+<h3 id="org71e92df">Working with mail</h3>
+<div class="outline-text-3" id="text-org71e92df">
+<p>
+For a long time, I've been using my mail inbox as a todo box, i.e. a
+collection of emails that call for action. Any mail that was not archived
+requested an answer in the short or long term. I doubt this is the
+recommended way of handling the inbox (but is there any?) but since I
+decided to move to GTD, it was also the opportunity to handle my mail
+differently. A few months back, I moved away from the default system email
+client on my OSX machine and started to use the almighty <a href="https://www.djcbsoftware.nl/code/mu/mu4e/">mu4e</a> (mu for
+emacs) that provides a very smooth <a href="https://www.djcbsoftware.nl/code/mu/mu4e/Org_002dmode-links.html">capture integration</a>. We can thus add a
+new template for quickly capturing a "Reply to" action to be filed in the
+inbox.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))
+        (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO Process \"%a\" %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+</pre>
+</div>
+
+<p>
+We can now define a binding for headers and view mode:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(define-key mu4e-headers-mode-map (kbd <span class="org-string">"C-c c"</span>) 'mu4e-org-store-and-capture)
+(define-key mu4e-view-mode-map    (kbd <span class="org-string">"C-c c"</span>) 'mu4e-org-store-and-capture)
+</pre>
+</div>
+
+<p>
+To register a reply action, the full sequence is thus <code>C-c c @</code>.
+Since I'm lazy, let's shorten it to <code>C-c i</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-mail</span> ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil <span class="org-string">"@"</span>))
+
+(define-key mu4e-headers-mode-map (kbd <span class="org-string">"C-c i"</span>) 'org-capture-mail)
+(define-key mu4e-view-mode-map    (kbd <span class="org-string">"C-c i"</span>) 'org-capture-mail)
+</pre>
+</div>
+
+<p>
+Last thing is a small <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Hooks.html">hook</a> to tell org-capture to use the full window
+instead of splitting the current window. This is not mandatory at all and
+mostly depends on your taste.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(add-hook 'org-capture-mode-hook 'delete-other-windows)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc1a2f5e" class="outline-3">
+<h3 id="orgc1a2f5e">Capturing tasks</h3>
+<div class="outline-text-3" id="text-orgc1a2f5e">
+<p>
+Any time you want to enter something in your inbox, be it a note or
+something related to a mail, just type <code>C-c i</code> and you should see the
+following capture window:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> </span><span class="org-org-level-1"><span class="custom">_</span></span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-11 Fri 07:53]</span></span>
+</pre>
+</div>
+
+<p>
+For mail related note, you don't have to do anything:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Process "Adaptive Computation Time &#8230;" </span><span class="org-org-level-1"><span class="custom">_</span></span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-08 Tue 08:51]</span></span>
+</pre>
+</div>
+
+<p>
+My inbox notes are generally short (verb + subject) because I use a daily
+review and it is generally enough information for later processing. To give
+you an idea, here is my current inbox (<i>2020-09-11 Fri</i>). Note that all the
+<code>Process</code> entries links to the relevant mail.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: content showstars indent</span>
+<span class="org-org-meta-line">#+FILETAGS: inbox</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Organize bibliography &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Process "Adaptive Computation Time &#8230;" &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Process "Relevant paper" &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Mail F.Wagner about team talk &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Buy "Canon printer" &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Process "ICDL oral presentation" &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Write discussion (plasticity paper) &#8230;</span>
+<span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Compute VSOM &#948;x&#948;y representation &#8230;</span>
+</pre>
+</div>
+
+<p>
+During the review, some of these notes will be filed directly under an
+existing project, some will be split in several subtasks and some others
+will lead to the creation of a new project.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2e94921" class="outline-3">
+<h3 id="org2e94921">Summary</h3>
+<div class="outline-text-3" id="text-org2e94921">
+<p>
+Our first (incomplete) GTD configuration is:
+</p>
+
+<details><summary><b>GTD.el</b> (version 1)</summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(require 'org)
+
+(setq org-directory <span class="org-string">"~/Documents/org"</span>)
+(setq org-agenda-files (list <span class="org-string">"inbox.org"</span>))
+
+(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))
+        (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil <span class="org-string">"i"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-mail</span> ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil <span class="org-string">"@"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Use full window for org-capture</span>
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(define-key global-map            (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
+(define-key global-map            (kbd <span class="org-string">"C-c i"</span>) 'org-capture-inbox)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Only if you use mu4e</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(require 'mu4e)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)</span>
+</pre>
+</div>
+</details>
+
+<p>
+The set of available commands at this point is:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Bindings</th>
+<th scope="col" class="org-left">Mode + where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Capture menu</td>
+<td class="org-left"><b>C-c c</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture a new TODO</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c i</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture a mail-related TODO</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c @</b></td>
+<td class="org-left">mu4e view/headers mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org63c12ab" class="outline-2">
+<h2 id="org63c12ab">Agenda</h2>
+<div class="outline-text-2" id="text-org63c12ab">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+</div>
+
+<div id="outline-container-org8921d9b" class="outline-3">
+<h3 id="org8921d9b">Basic setup (I)</h3>
+<div class="outline-text-3" id="text-org8921d9b">
+<p>
+Before heading to the review process, we need first to setup the <a href="https://orgmode.org/manual/Agenda-Views.html#Agenda-Views">agenda</a>
+that will help us to track daily meetings and tasks. Using the previous
+inbox configuration, you can actually already have a view of your inbox
+using the <code>M-x org-agenda</code> command that will bring up a menu where you can
+choose what to display. Before using it, let me first define a new global
+key binding (<code>C-c a</code>) for quick access to the agenda:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(define-key global-map (kbd <span class="org-string">"C-c a"</span>) 'org-agenda)
+</pre>
+</div>
+
+<p>
+No, let's see what our tasks look like by invoking the "List of All TODO
+entries" using the <code>t</code> menu (full sequence is thus <code>C-c a t</code>):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Global list of TODO items of type: ALL</span>
+<span class="org-bold">Press &#8216;N r&#8217; (e.g. &#8216;0 r&#8217;) to search again: (0)[ALL] (1)TODO (2)DONE</span>
+  inbox:      TODO Organize bibliography                                     <span class="org-italic">:inbox:</span>
+  inbox:      TODO Process "Adaptive Computation Time&#8230;"                      <span class="org-italic">:inbox:</span>
+  inbox:      TODO Process "Relevant paper"                                  <span class="org-italic">:inbox:</span>
+  inbox:      TODO Mail F.Wagner about team talk                             <span class="org-italic">:inbox:</span>
+  inbox:      TODO Buy "Canon printer"                                       <span class="org-italic">:inbox:</span>
+  inbox:      TODO Process "ICDL oral presentation"                          <span class="org-italic">:inbox:</span>
+  inbox:      TODO Write discution (plasticity paper)                        <span class="org-italic">:inbox:</span>
+  inbox:      TODO Compute VSOM &#948;x&#948;y representation                          <span class="org-italic">:inbox:</span>
+</pre>
+</div>
+
+<p>
+The display of the task list is bit redundant because we have an "inbox" on
+the left and an "inbox" on the right. However, they do not have the same
+origin. The one on the left is the name of the file where the related TODO
+is stored while the one on the right is a tag. If you remember our inbox
+file setup header, there was a <code>#+FILETAGS: inbox</code> line that assign the
+"inbox" tag to each entry. Since tags are redundant, let's just remove them
+by filtering them out:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-agenda-hide-tags-regexp <span class="org-string">"."</span>)
+</pre>
+</div>
+
+<p>
+With this line, we actually ask the agenda to hide any tag (<code>.</code>) that may be
+present. Of course, you can choose to be more specific and hide only some
+tags, it's up to you. Now we still have to choose what to do with the left
+part displaying "inbox". This is displayed because there is no <a href="https://orgmode.org/manual/Categories.html">category</a>
+assigned to the entry and when the agenda display a TODO item, the default
+behabior is to display the category or the filename if there is no
+category. You can of course change what is actually displayed by modifying
+the <a href="https://orgmode.org/manual/Presentation-and-Sorting.html">org-agenda-prefix-format</a>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-agenda-prefix-format
+      '((agenda . <span class="org-string">" %i %-12:c%?-12t% s"</span>)
+        (todo   . <span class="org-string">" %i %-12:c"</span>)
+        (tags   . <span class="org-string">" %i %-12:c"</span>)
+        (search . <span class="org-string">" %i %-12:c"</span>))
+</pre>
+</div>
+
+<p>
+We could also add a <i>#+CATEGORY: INBOX</i> to the header of our inbox file but I
+prefer not to have anything displayed for now. So let's get's rid of the
+category display for todo items:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-agenda-prefix-format
+      '((agenda . <span class="org-string">" %i %-12:c%?-12t% s"</span>)
+        (todo   . <span class="org-string">" "</span>)
+        (tags   . <span class="org-string">" %i %-12:c"</span>)
+        (search . <span class="org-string">" %i %-12:c"</span>))
+</pre>
+</div>
+
+<p>
+And the result is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Global list of TODO items of type: ALL</span>
+<span class="org-bold">Press &#8216;N r&#8217; (e.g. &#8216;0 r&#8217;) to search again: (0)[ALL] (1)TODO (2)DONE</span>
+  TODO Organize bibliography
+  TODO Process "Adaptive Computation Time&#8230;"
+  TODO Process "Relevant paper"
+  TODO Mail F.Wagner about team talk
+  TODO Buy "Canon printer"
+  TODO Process "ICDL oral presentation"
+  TODO Write discution (plasticity paper)
+  TODO Compute VSOM &#948;x&#948;y representation
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org40e4c6f" class="outline-3">
+<h3 id="org40e4c6f">Recurrent events</h3>
+<div class="outline-text-3" id="text-org40e4c6f">
+<p>
+Beside notes taking, I send or received a number of appointments (generally
+through mail) and I need to save them. I prefer not to file them in my
+inbox since generally I know both the topic and when they will occur such
+that I can directly store them in a dedicated <code>agenda.org</code> file that will be
+used to store all my scheduled events and meetings. Let's first add this
+new file to the list of org files:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-agenda-files (list <span class="org-string">"inbox.org"</span> <span class="org-string">"agenda.org"</span>))
+</pre>
+</div>
+
+<p>
+The initial file has a basic startup header configuration and I also
+defined a set of default <a href="https://orgmode.org/manual/Tags.html">tags</a> using the <code>#+TAGS</code> syntax. This will ease the
+assignment of tags when adding a new entry or modifying an entry (we'll
+that later):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: hideall showstars indent</span>
+<span class="org-org-meta-line">#+TAGS:    event(e) meeting(m) deadline(d)</span>
+<span class="org-org-meta-line">#+TAGS:    @outside(o) @imn(i) @inria(r) @online(l) @canceled(c)</span>
+</pre>
+</div>
+
+<p>
+The structure of my agenda is split into birthdays and recurrent / past /
+future events. This quite arbitrary and you can use any a different
+structure. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Birthdays</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Recurrent</span></span>
+  * <span class="org-bold">Scheduled</span>
+  * <span class="org-bold">People</span>
+  * <span class="org-bold">Team</span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Past</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Future</span></span>
+</pre>
+</div>
+
+<p>
+Let's first start filling the birthdays part. For any yearly event such as
+birthdays, we can add special entries using the <a href="https://www.gnu.org/software/emacs/manual/html_node/org/Weekly_002fdaily-agenda.html">org-anniversary</a> syntax
+(from the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Diary.html">diary</a>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Birthdays</span></span>
+  %%(org-anniversary 1976 6  1) Emacs is %d years old
+  %%(org-anniversary 1953 3 16) Richard Stallman is %d years old
+</pre>
+</div>
+
+<p>
+Each time month/day is displayed in the agenda, the corresponding text will
+be displayed as well.
+</p>
+
+<p>
+For the recurrent events, I make a separation between scheduled, people and
+team. In my case, scheduled events are mostly daily events and I use the
+agenda as a reminder. I could have used the <a href="https://orgmode.org/manual/Repeated-tasks.html">repeating tasks</a> feature (using
+syntax such as <i><span class="timestamp-wrapper"><span class="timestamp">[2020-09-12 Sat 09:00 +1d]</span></span></i>, but the problem is that I wanted
+to have some daily repeating task only for workdays and the previous syntax
+does not offer such choice. Instead, I've used the <a href="https://stackoverflow.com/questions/28369833">following code</a>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Recurrent</span></span>
+  * <span class="org-bold">Scheduled</span>
+    * <span class="org-bold">GTD Review</span> 18:00-18:20                                          <span class="org-italic">:review:@home:</span>
+      <span class="org-org-special-keyword"><span class="org-italic">SCHEDULED:</span></span><span class="org-italic"> </span><span class="org-org-sexp-date"><span class="org-italic">&lt;%%(memq (calendar-day-of-week date) '(1 2 3 4 5))&gt;</span></span>
+    * <span class="org-bold">Notes cleaning</span> 18:20-18:30                                      <span class="org-italic">:review:@home:</span>
+      <span class="org-org-special-keyword"><span class="org-italic">SCHEDULED:</span></span><span class="org-italic"> </span><span class="org-org-sexp-date"><span class="org-italic">&lt;%%(memq (calendar-day-of-week date) '(1 2 3 4 5))&gt;</span></span>
+    * <span class="org-bold">Agenda cleaning</span>                                                 <span class="org-italic">:review:@home:</span>
+      <span class="org-org-special-keyword"><span class="org-italic">SCHEDULED:</span></span><span class="org-italic"> </span><span class="org-org-date"><span class="org-italic">&lt;2020-09-01 Tue +1m&gt;</span></span>
+</pre>
+</div>
+
+<p>
+For recurrent events with people, I do not use the repeating task feature
+because I want to be able to cancel a specific meeting if it did not happen
+and also to use the entry for taking notes (we will see that below).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Recurrent</span></span>
+  * <span class="org-bold">People</span>
+    * <span class="org-bold">Student A (weekly meeting)</span>                                           <span class="org-italic">:meeting:</span>
+      * <span class="org-bold">Student A</span>                                                        <span class="org-italic">:@canceled:</span>
+        <span class="org-org-date"><span class="org-italic">&lt;2020-09-14 Mon 10:00-11:00&gt;</span></span>
+      * <span class="org-bold">Student A</span>                                                          <span class="org-italic">:@online:</span>
+        <span class="org-org-date"><span class="org-italic">&lt;2020-09-07 Mon 10:00-11:00&gt;</span></span>
+      * <span class="org-bold">Student A</span>                                                             <span class="org-italic">:@imn:</span>
+        <span class="org-org-date"><span class="org-italic">&lt;2020-09-14 Mon 10:00-11:00&gt;</span></span>
+</pre>
+</div>
+
+<p>
+For these recurrent events, I write them directly into the agenda file at
+the end of a meeting where we generally agree on next meeting. Here is
+<a href="https://emacs.stackexchange.com/questions/10504">quick reminder</a> by <a href="https://emacs.stackexchange.com/users/780/glucas">Greg Lucas</a> on how to enter date and their definition:
+</p>
+
+<dl class="org-dl">
+<dt><b>PLAIN timestamp</b> (<code>C-c .</code>)</dt><dd>This is used for things like appointments where
+the entry occurs at a specific date/time. Such an entry will show up in
+the agenda on the specified day, and will not show up after that day has
+passed. Note that an appointment in the past won't keep showing up on
+your agenda regardless of whether you mark it DONE: if you didn't go to
+your doctor's appointment yesterday, that doesn't mean you still have one
+today!</dd>
+
+<dt><b>SCHEDULED timestamp</b> (<code>C-c C-s</code>)</dt><dd>This is used to indicate when you intend to
+do the task. It will show up on the agenda on the scheduled day. If you
+don't complete the task at that time, it will continue to show up on the
+agenda on the following days to show you that you have not completed
+something that you planned to do.</dd>
+
+<dt><b>DEADLINE timestamp</b> (<code>C-c C-d</code>)</dt><dd>This is used to indicate when something must
+be completed. Typically you want to see deadlines ahead of time, so that
+you can do whatever it is that must be done to meet them. Like a
+scheduled entry, if you miss a deadline it will continue to appear on the
+agenda as past due.</dd>
+
+<dt><b>INACTIVE timestamp</b> (<code>C-c !</code>)</dt><dd>This is when you want to attach a date to an
+entry but do not want it to show up in the agenda at all. Inactive
+timestamps have no special behavior.</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgc5cd1ca" class="outline-3">
+<h3 id="orgc5cd1ca">Meetings &amp; notes</h3>
+<div class="outline-text-3" id="text-orgc5cd1ca">
+<p>
+Now it is time to define a new capture template for registering a meeting.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
+ (concat <span class="org-string">"* %? :meeting:\n"</span>
+         <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
+</pre>
+</div>
+
+<p>
+It is not very complicated: any meeting will be filed in <code>agenda.org</code> under
+the <b>Future</b> header (and will be refiled later, during agenda review). By
+default, the timestamp is the current day with a rounded clock since my
+meetings generally starts at plain hours. When invoked, this template looks
+like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Capture buffer. Finish 'C-c C-c', refile 'C-c C-w', abort 'C-c C-k'.</span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="custom">_</span></span><span class="org-org-level-1">                                                                        </span><span class="org-org-level-1"><span class="org-italic">:meeting:</span></span>
+  <span class="org-org-date"><span class="org-italic">&lt;2020-09-11 Fri 11:00&gt;</span></span>
+</pre>
+</div>
+
+<p>
+When I enter a meeting, I generally use the name of people that will be
+present at the meeting (if there are not too many people) or the topic of
+the meeting. The goal is to have short but useful information when the
+meeting shows up in my agenda.
+</p>
+
+<p>
+The next step is to define a "Note" template that will be used to take
+notes during a meeting:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
+ (concat <span class="org-string">"* Note (%a)\n"</span>
+         <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
+</pre>
+</div>
+
+<p>
+We will (temporarily) store these notes in a <code>notes.org</code> dedicated file.
+Maybe you've noticed the "<code>%a</code>", in the template. This is a <a href="https://orgmode.org/manual/Template-expansion.html#Template-expansion">template
+extension</a> that will be resolved to the content created with the
+<b>org-store-link</b> command. However, if you capture a note while your cursor is
+on the same line of an agenda entry, the content will be filled with this
+entry. This is super convenient to link your note with the agenda entry.
+</p>
+
+<p>
+My initial <code>notes.org</code> is as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: content showstars indent</span>
+<span class="org-org-meta-line">#+FILETAGS: notes</span>
+</pre>
+</div>
+
+<p>
+Nothing fancy here since it is actually a temporary storage, notes will be
+later moved to the relevant project they belong to.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7afb7bd" class="outline-3">
+<h3 id="org7afb7bd">Summary</h3>
+<div class="outline-text-3" id="text-org7afb7bd">
+<p>
+Here is our updated configuration:
+</p>
+
+<details><summary><b>GTD.el</b> (version 2)</summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(require 'org)
+
+(setq org-directory <span class="org-string">"~/Documents/org"</span>)
+(setq org-agenda-files (list <span class="org-string">"inbox.org"</span> <span class="org-string">"agenda.org"</span> <span class="org-string">"notes.org"</span>))
+
+(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))
+        (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
+         (concat <span class="org-string">"* %? :meeting:\n"</span>
+                 <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
+        (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
+         (concat <span class="org-string">"* Note (%a)\n"</span>
+                 <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
+        (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil <span class="org-string">"i"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-mail</span> ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil <span class="org-string">"@"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Use full window for org-capture</span>
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+(define-key global-map            (kbd <span class="org-string">"C-c a"</span>) 'org-agenda)
+(define-key global-map            (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
+(define-key global-map            (kbd <span class="org-string">"C-c i"</span>) 'org-capture-inbox)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Only if you use mu4e</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(require 'mu4e)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)</span>
+</pre>
+</div>
+</details>
+
+<p>
+The set of available commands is now:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Bindings</th>
+<th scope="col" class="org-left">Mode + where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Agenda</td>
+<td class="org-left"><b>C-c a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Agenda for today</td>
+<td class="org-left"><b>C-c a a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture menu</td>
+<td class="org-left"><b>C-c c</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting (agenda.org)</td>
+<td class="org-left"><b>C-c c m</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting note (notes.org)</td>
+<td class="org-left"><b>C-c c n</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture generic TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c i</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture mail TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c @</b></td>
+<td class="org-left">mu4e view/headers mode</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Add/Remove tag</td>
+<td class="org-left"><b>C-c C-c</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Plain timestamp</td>
+<td class="org-left"><b>C-c .</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Scheduled timestamp</td>
+<td class="org-left"><b>C-c s</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Deadline timestamp</td>
+<td class="org-left"><b>C-c d</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Inactive timestamp</td>
+<td class="org-left"><b>C-c !</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org471694e" class="outline-2">
+<h2 id="org471694e">Review</h2>
+<div class="outline-text-2" id="text-org471694e">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+<p>
+The actual review process is probably the less documented aspect of GTD
+from all the resources I've read so far. When it is mentioned, some people
+explain they have a weekly review while some others uses a daily review. To
+get things further complicated, it is not clear if this process is a matter
+of a few minutes or a matter of hours. My personal point of view so far
+(and this may change in the future) is that a daily process is probably the
+way to go in my case since I'm adding from 5 to 10 entries to my inbox
+each day (mail included). For me, the end of the work day seems to be the
+best time to do the review since my memory is still fresh with things I've
+done during the day, and what may come next for each project.
+</p>
+</div>
+
+<div id="outline-container-org5e589b9" class="outline-3">
+<h3 id="org5e589b9">Basic setup</h3>
+<div class="outline-text-3" id="text-org5e589b9">
+<p>
+My review process consists mostly in moving things out of the inbox in
+order to file them in the corresponding project if it exists or to create
+one if this is not the case. To do that, we need first to create a new
+<code>projects.org</code> file that will hold all our projects. The structure of this
+file is quite important because you'll interact with it a lot of times. I
+chose to split first my projects into global categories:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: content showstars indent</span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Students</span></span><span class="org-org-level-1">                                                                </span><span class="org-org-level-1"><span class="org-italic">:students:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Team</span></span><span class="org-org-level-1">                                                                        </span><span class="org-org-level-1"><span class="org-italic">:team:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Collaboratorive projects</span></span><span class="org-org-level-1">                                   </span><span class="org-org-level-1"><span class="org-italic">:collaborative:project:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Events organization</span></span><span class="org-org-level-1">                                                       </span><span class="org-org-level-1"><span class="org-italic">:events:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Academic papers</span></span><span class="org-org-level-1">                                                          </span><span class="org-org-level-1"><span class="org-italic">:article:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Personal projects</span></span><span class="org-org-level-1">                                               </span><span class="org-org-level-1"><span class="org-italic">:personal:project:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">ReScience</span></span><span class="org-org-level-1">                                                              </span><span class="org-org-level-1"><span class="org-italic">:rescience:</span></span>
+<span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Home</span></span><span class="org-org-level-1">                                                                        </span><span class="org-org-level-1"><span class="org-italic">:home:</span></span>
+</pre>
+</div>
+
+<p>
+I then add projects under one of these categories using a specific
+structure. Let me show you a typical student "project":
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-org-level-1"><span class="org-bold">Students</span></span><span class="org-org-level-1">                                                                </span><span class="org-org-level-1"><span class="org-italic">:students:</span></span>
+  * <span class="org-bold">J.Doe (PhD)</span> <span class="org-org-checkbox-statistics-todo">[/]</span>                                                      <span class="org-italic">:phd:j.doe:</span>
+    <span class="org-italic">:PROPERTIES:</span>
+    <span class="org-italic">:CATEGORY: J.DOE</span>
+    <span class="org-italic">:VISIBILITY: hide</span>
+    <span class="org-italic">:COOKIE_DATA: recursive todo</span>
+    <span class="org-italic">:END:</span>
+    * <span class="org-bold">Information</span>                                                             <span class="org-italic">:info:</span>
+      <span class="org-italic">:PROPERTIES:</span>
+      <span class="org-italic">:VISIBILITY: hide</span>
+      <span class="org-italic">:END:</span>
+    * <span class="org-bold">Notes</span>                                                                  <span class="org-italic">:notes:</span>
+      <span class="org-italic">:PROPERTIES:</span>
+      <span class="org-italic">:VISIBILITY: hide</span>
+      <span class="org-italic">:END:</span>
+    * <span class="org-bold">Tasks</span>                                                                  <span class="org-italic">:tasks:</span>
+      <span class="org-italic">:PROPERTIES:</span>
+      <span class="org-italic">:VISIBILITY: content</span>
+      <span class="org-italic">:END:</span>
+</pre>
+</div>
+
+<p>
+The <b>information</b> section contains information related to the project and
+you're free to organize the way you want. The <b>notes</b> section is where I move
+meeting notes related to this project during my notes review. Finally, the
+<b>tasks</b> is where I will move related inbox entries. I also set different
+<a href="https://orgmode.org/manual/Initial-visibility.html">visibility</a> properties for each section: information and notes are hidden
+while tasks section is open. You might have also noticed the <a href="https://orgmode.org/manual/Breaking-Down-Tasks.html">COOKIE_DATA</a>
+property at the top and the <code>[/]</code> at the end of the project name. These two
+components will help us to track the number of pending tasks vs the number
+of completed tasks. Each time we'll move a task from the <b>TODO</b> state to the
+<b>DONE</b> state, the header will be updated accordingly (you can also refresh it
+with <code>C-c C-c</code> when the cursor is over it).
+</p>
+
+<p>
+The overall number of projects is very dependent on you. In my case, I've
+about 40 opened projects. Some will last a few months (e.g. academic
+papers), some will last a few years (e.g. grants and phd students) and some
+others do not have foreseeable end (house, garden, car).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2dd97eb" class="outline-3">
+<h3 id="org2dd97eb">Moving things</h3>
+<div class="outline-text-3" id="text-org2dd97eb">
+<p>
+Before refiling inbox entries into projects, I usually try to set an
+estimated time (effort) needed to complete the tasks as well as some
+contextual information (using tags). To ease the process, we'll first
+modify the inbox header to add typical estimated efforts and some tags that
+will speed the overall processing of each entry.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-meta-line">#+STARTUP: content showstars indent</span>
+<span class="org-org-meta-line">#+TAGS: @home(h) @work(w) @mail(m) @comp(c) @web(b) </span>
+<span class="org-org-meta-line">#+PROPERTY: Effort_ALL 0 0:05 0:10 0:15 0:30 0:45 1:00 2:00 4:00</span>
+</pre>
+</div>
+
+<p>
+Before refiling (i.e. moving) an entry, I will set some tags using the <code>C-c
+C-c</code> keybinding and if the entry is an atomic task (i.e. that can be done
+independently of any others tasks), I'll assign an <a href="https://orgmode.org/manual/Effort-Estimates.html">estimated effort</a> using
+the existing <code>C-c C-x e</code> key binding. For example, let's consider the
+following entry before review:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Write review section (GTD.org)</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-12 Sat 09:20]</span></span>
+</pre>
+</div>
+
+<p>
+After having set effort and tags, the entry reads:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Write review section (GTD.org)                                        </span><span class="org-org-level-1"><span class="org-org-tag">:@comp:</span></span>
+  <span class="org-italic">:PROPERTIES:</span>
+  <span class="org-italic">:Effort:   0:30</span>
+  <span class="org-italic">:END:</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-12 Sat 09:20]</span></span>
+</pre>
+</div>
+
+<p>
+Tags are supposed to give some contextual information on where the task can
+be completed. However, I did not really use them partly due to the 2020
+sanitary crisis that tends to blur the line between work and home. Setting
+the estimated is however quite important for me because when I'll activate
+a task, the estimated effort will be displayed in the agenda and will help
+me to decide if I can engage in task depending on the amount of free time I
+have. This is especially useful for small tasks (5 minutes) that can be
+completed any time.
+</p>
+
+<p>
+Now it's time to move the entry.
+</p>
+
+<p>
+I explained that inbox entries have to be moved into the relevant project
+under the <b>Tasks</b> headline. To do that, we'll use the <a href="https://orgmode.org/manual/Refile-and-Copy.html#Refile-and-Copy">org-refile</a> function
+(bound to <code>C-c C-w</code> when on a headline) and specify where the entry can be
+refiled in the <code>projetcs.org</code>. If your remember, we also have notes that
+needs to be refiled in projects such that targets in <code>projects.org</code> are
+either <b>Notes</b> or <b>Tasks</b>. We thus need to define a refile target using
+regexp. One easy way to do that is to use the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Regexp-Functions.html">regexp-opt</a> function:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(regexp-opt '(<span class="org-string">"Tasks"</span> <span class="org-string">"Notes"</span>))
+</pre>
+</div>
+
+<p>
+You can evaluate the expression by placing the cursor at the end of the
+line and type <code>C-u C-x C-e</code>. The optimized regex
+(<code>"\\(?:\\(?:Note\\|Task\\)s\\)"</code>) should appear at the end of the line. We
+can now use it so specifiy our targets:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-refile-targets
+      '((<span class="org-string">"projects.org"</span> :regexp . <span class="org-string">"\\(?:\\(?:Note\\|Task\\)s\\)"</span>)))
+</pre>
+</div>
+
+<p>
+Last step is to tell org-mode we want to specify a refile target using the
+file path.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+</pre>
+</div>
+
+<p>
+To refile a J.Doe related inbox entry, you can then type:
+</p>
+
+<pre class="example">
+C-c C-w + "J.Doe" + tab + "T" + tab
+</pre>
+
+<p>
+and this will be resolved to <code>"projects.org/Students/J.Doe/Tasks"</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbcbb183" class="outline-3">
+<h3 id="orgbcbb183">Activating tasks</h3>
+<div class="outline-text-3" id="text-orgbcbb183">
+<p>
+After having emptied the inbox, it's time to have a look at the different
+projects to decide what are the next tasks to be activated. Before doing
+that, we need to define what is an active task. Org-mode defines <a href="https://orgmode.org/manual/TODO-Basics.html">two
+different states</a> for <b>TODO</b> items: <b>TODO</b> and <b>DONE</b>. We need to modify this in
+order to introduce two new non-terminal state: <b>NEXT</b> to express this is the
+next task to be completed and <b>HOLD</b> to express this task is on hold (for
+whaterver reason):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-todo-keywords
+      '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"HOLD(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d)"</span>)))
+</pre>
+</div>
+
+<p>
+Thanks to <a href="https://emacs.stackexchange.com/questions/35751">Erik Anderson</a>, we can also add a hook that will log when we
+activate a task by creating an "ACTIVATED" property the first time the task
+enters the <b>NEXT</b> state:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(<span class="org-keyword">defun</span> <span class="org-function-name">log-todo-next-creation-date</span> (&amp;rest ignore)
+  <span class="org-doc">"Log NEXT creation time in the property drawer under the key 'ACTIVATED'"</span>
+  (when (and (string= (org-get-todo-state) <span class="org-string">"NEXT"</span>)
+             (not (org-entry-get nil <span class="org-string">"ACTIVATED"</span>)))
+    (org-entry-put nil <span class="org-string">"ACTIVATED"</span> (format-time-string <span class="org-string">"[%Y-%m-%d]"</span>))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+</pre>
+</div>
+
+<p>
+We'll see in the next section how to exploit this property. Next step is to
+<a href="https://orgmode.org/manual/Checkboxes.html">update the trailing</a> <code>[/]</code> behind each headline. To do that, you can type <code>C-u
+C-c #</code>. For each projects, you now have something like <code>[x/y]</code> where x is the
+number of closed tasks and y is the total number of tasks. Any project with
+x &lt; y means that there are some tasks that can be activated. You can now
+selectively open a project and decide if you want to activate one of the
+non closed task. The most easy way to do that is to go over the TODO
+keyword and use <code>S-right</code> to advance to the <b>NEXT</b> state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5394429" class="outline-3">
+<h3 id="org5394429">Summary</h3>
+<div class="outline-text-3" id="text-org5394429">
+<p>
+Here is our updated configuration:
+</p>
+
+<details><summary><b>GTD.el</b> (version 3)</summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(require 'org)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Files</span>
+(setq org-directory <span class="org-string">"~/Documents/org"</span>)
+(setq org-agenda-files (list <span class="org-string">"inbox.org"</span> <span class="org-string">"agenda.org"</span> <span class="org-string">"notes.org"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Capture</span>
+(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))
+        (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
+         (concat <span class="org-string">"* %? :meeting:\n"</span>
+                 <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
+        (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
+         (concat <span class="org-string">"* Note (%a)\n"</span>
+                 <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
+        (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil <span class="org-string">"i"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-mail</span> ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil <span class="org-string">"@"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Use full window for org-capture</span>
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Key bindings</span>
+(define-key global-map            (kbd <span class="org-string">"C-c a"</span>) 'org-agenda)
+(define-key global-map            (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
+(define-key global-map            (kbd <span class="org-string">"C-c i"</span>) 'org-capture-inbox)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Only if you use mu4e</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(require 'mu4e)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Refile</span>
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-targets
+      '((<span class="org-string">"projects.org"</span> :regexp . <span class="org-string">"\\(?:\\(?:Note\\|Task\\)s\\)"</span>)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">TODO</span>
+(setq org-todo-keywords
+      '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"HOLD(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d)"</span>)))
+(<span class="org-keyword">defun</span> <span class="org-function-name">log-todo-next-creation-date</span> (&amp;rest ignore)
+  <span class="org-doc">"Log NEXT creation time in the property drawer under the key 'ACTIVATED'"</span>
+  (when (and (string= (org-get-todo-state) <span class="org-string">"NEXT"</span>)
+             (not (org-entry-get nil <span class="org-string">"ACTIVATED"</span>)))
+    (org-entry-put nil <span class="org-string">"ACTIVATED"</span> (format-time-string <span class="org-string">"[%Y-%m-%d]"</span>))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+</pre>
+</div>
+</details>
+
+
+<p>
+The set of available commands is now:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Bindings</th>
+<th scope="col" class="org-left">Mode + where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Agenda</td>
+<td class="org-left"><b>C-c a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Agenda for today</td>
+<td class="org-left"><b>C-c a a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture menu</td>
+<td class="org-left"><b>C-c c</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting (agenda.org)</td>
+<td class="org-left"><b>C-c c m</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting note (notes.org)</td>
+<td class="org-left"><b>C-c c n</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture generic TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c i</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture mail TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c @</b></td>
+<td class="org-left">mu4e view/headers mode</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Add/Remove tag</td>
+<td class="org-left"><b>C-c C-c</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Update progress indicator</td>
+<td class="org-left"><b>C-c C-c</b></td>
+<td class="org-left">org-mode on [/]</td>
+</tr>
+
+<tr>
+<td class="org-left">Update all progress indicators</td>
+<td class="org-left"><b>C-u C-c #</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Enter estimated effort</td>
+<td class="org-left"><b>C-c C-x e</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Refile section</td>
+<td class="org-left"><b>C-c C-w</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Move to next TODO state</td>
+<td class="org-left"><b>S-right</b></td>
+<td class="org-left">org-mode on TODO</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Plain timestamp</td>
+<td class="org-left"><b>C-c .</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Scheduled timestamp</td>
+<td class="org-left"><b>C-c s</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Deadline timestamp</td>
+<td class="org-left"><b>C-c d</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Inactive timestamp</td>
+<td class="org-left"><b>C-c !</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org982c154" class="outline-2">
+<h2 id="org982c154">Doing things</h2>
+<div class="outline-text-2" id="text-org982c154">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+</div>
+
+<div id="outline-container-org80b7b81" class="outline-3">
+<h3 id="org80b7b81">Agenda setup (II)</h3>
+<div class="outline-text-3" id="text-org80b7b81">
+<p>
+It's now time to work on custom agenda view that will display meetings for
+the day, task that need to be done and deadlines. We'all also add the
+content of the inbox ad a reminder to file entries, and the tasks we've
+completed today. So overall, our custom agenda headers will be:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Day-agenda (W37):</span> &#8230;
+<span class="org-bold">Sunday 13 September 2020</span> &#8230;
+<span class="org-bold">Tasks</span> &#8230;
+<span class="org-bold">Deadlines</span> &#8230;
+<span class="org-bold">Inbox</span> &#8230;
+<span class="org-bold">Completed today</span> &#8230;
+</pre>
+</div>
+
+<p>
+Let's write a new agenda customn command (<code>g</code>) using the
+<a href="https://orgmode.org/worg/org-tutorials/org-custom-agenda-commands.html">org-custom-agenda-commands</a> variable.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-agenda-custom-commands
+      '((<span class="org-string">"g"</span> <span class="org-string">"Get Things Done (GTD)"</span>
+         ((agenda <span class="org-string">""</span>
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo <span class="org-string">"NEXT"</span>
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format <span class="org-string">"  %i %-12:c [%e] "</span>)
+                 (org-agenda-overriding-header <span class="org-string">"\nTasks\n"</span>)))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date <span class="org-string">""</span>)
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp <span class="org-string">"\\* NEXT"</span>))
+                   (org-agenda-overriding-header <span class="org-string">"\nDeadlines"</span>)))
+          (tags-todo <span class="org-string">"inbox"</span>
+                     ((org-agenda-prefix-format <span class="org-string">"  %?-12t% s"</span>)
+                      (org-agenda-overriding-header <span class="org-string">"\nInbox\n"</span>)))
+          (tags <span class="org-string">"CLOSED&gt;=\"&lt;today&gt;\""</span>
+                ((org-agenda-overriding-header <span class="org-string">"\nCompleted today\n"</span>)))))))
+</pre>
+</div>
+
+<p>
+I won't detail every line because you'll find a lot of information online,
+in the documentation and inside emacs as well.
+</p>
+
+<details open><summary>Agenda view (2020-09-13)</summary>
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-bold">Day-agenda (W37):</span>
+
+<span class="org-bold">Sunday 13 September 2020</span>
+
+   8:00......   ----------------
+   8:45- 9:00   Scheduled:  Keyboard training 
+  10:00......   ----------------
+  12:00......   ----------------
+  14:00......   ----------------
+  <span class="org-bold">14:19......</span>   <span class="org-bold">&gt; now &lt;</span>
+  16:00......   ----------------
+  18:00......   ----------------
+  20:00......   ----------------
+  Sched.12x:  Agenda cleaning
+
+<span class="org-bold">Tasks</span>
+
+   VIZBOOK:       [0:30] NEXT Organize book writing          (4d.)
+   RESCIENCE-X:   [0:30] NEXT ReScience X DOI registrar      (4d.)
+   DNFSOM:        [0:20] NEXT [#A] Read section 4 on DNFSOM  (2d.)
+   X.YYYYY:       [0:05] NEXT Mail X.Yyyyy (PhD)             (1d.)
+
+<span class="org-bold">Deadlines</span>
+
+   3 d. ago:  NEXT [#A] Read <span class="org-italic">"Chapitre RNN 2020-09-08"</span>       (4d.)
+   3 d. ago:  NEXT [#A] Read <span class="org-italic">"Chapitre WMEXP 2020-09-08]]"</span>   (4d.)
+
+<span class="org-bold">Inbox</span>
+
+  TODO Organize bibliography
+  TODO Read to <span class="org-italic">"Adaptive Computation Time for Recurrent Neural Networks"</span>
+  TODO Process <span class="org-italic">"Relevant paper"</span>
+  TODO Mail X.Yyyyy about team talk
+  TODO Buy <span class="org-italic">"Canon printer"</span>
+  TODO Process <span class="org-italic">"ICDL oral presentation"</span>
+  TODO Write discution (plasticity paper)
+  TODO Compute VSOM &#948;x&#948;y representation
+  TODO Process <span class="org-italic">"Internships for Students at Ecole Polytechnique"</span>
+
+<span class="org-bold">Completed today</span>
+
+  DONE Write GTD Review section
+
+</pre>
+</div>
+</details>
+
+<p>
+You can see that entries in the <b>Task</b> section display a duration in front of
+the description. May you've guessed that this duration corresponds to the
+estimated effort we entered during the review process. Now, each time you
+have some free time ahead, you can which task you want to engage based on
+this estimation. Very convenient.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org52a364d" class="outline-3">
+<h3 id="org52a364d">Completing a task</h3>
+<div class="outline-text-3" id="text-org52a364d">
+<p>
+Once you've chosen a task to do, and before starting the task, you can
+choose to log the time it will actually take to complete the task such that
+you can later refine your estimation. Just type <b>C-c C-x i</b> (clock in) to
+start the clock and <b>C-c C-x o</b> (clock out) to stop the clock and to add the
+duration in the logbook. Once a task is completed, you can change its state
+from <b>NEXT</b> to <b>DONE</b> (using <b>S-right</b> while the cursor is over the <b>NEXT</b>
+word). In order to keep track of when the task was completed, we can ask
+org-mode to log that:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq org-log-done 'time)
+</pre>
+</div>
+
+<p>
+This will add a CLOSED: <span class="timestamp-wrapper"><span class="timestamp">[2020-09-13 Sun 19:24] </span></span> line under the corresponding
+entry. Using this time, we can thus diplay the tasks that have been
+completed during the day (see the last line of our agenda custom commands).
+</p>
+
+<p>
+To summarize, for a given task:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Some task</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 19:23]</span></span>
+</pre>
+</div>
+
+<p>
+hIt will be first modified be when the estimated effort is set:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-salient">TODO</span><span class="org-org-level-1"> Some task</span>
+  <span class="org-italic">:PROPERTIES:</span>
+  <span class="org-italic">:EFFORT: 0:30</span>
+  <span class="org-italic">:END:</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 19:23]</span></span>
+</pre>
+</div>
+
+<p>
+and further modified when activated:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-popout">NEXT</span><span class="org-org-level-1"> Some task</span>
+  <span class="org-italic">:PROPERTIES:</span>
+  <span class="org-italic">:EFFORT: 0:30</span>
+  <span class="org-italic">:ACTIVATED: </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun]</span></span>
+  <span class="org-italic">:END:</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 19:23]</span></span>
+</pre>
+</div>
+
+<p>
+Finally, once completed, we have:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-org"><span class="org-org-level-1">* </span><span class="org-face-faded">DONE</span><span class="org-org-level-1"> Some task</span>
+  <span class="org-org-special-keyword"><span class="org-italic">CLOSED:</span></span><span class="org-italic"> </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 20:14]</span></span>
+  <span class="org-italic">:PROPERTIES:</span>
+  <span class="org-italic">:EFFORT: 0:30</span>
+  <span class="org-italic">:ACTIVATED: </span><span class="org-org-date"><span class="org-italic">[2020-08-30]</span></span>
+  <span class="org-italic">:END:</span>
+  <span class="org-italic">:LOGBOOK:</span>
+  <span class="org-org-special-keyword"><span class="org-italic">CLOCK:</span></span><span class="org-italic"> </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 19:55]--[2020-09-13 Sun 20:14]</span></span><span class="org-italic"> =&gt; 0:19</span>
+  <span class="org-italic">:END:</span>
+  <span class="org-italic">Entered on </span><span class="org-org-date"><span class="org-italic">[2020-09-13 Sun 19:23]</span></span>
+</pre>
+</div>
+
+<p>
+Next time we have to estimate the effort for this specific task, and based
+on the above log, we'll probably set it to 20 minutes instead of 30.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga8482d6" class="outline-3">
+<h3 id="orga8482d6">Summary</h3>
+<div class="outline-text-3" id="text-orga8482d6">
+<p>
+Our final configuration is thus
+</p>
+
+<details><summary><b>GTD.el</b> (version 4)</summary>
+<div class="org-src-container">
+<pre class="src src-lisp">(require 'org)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Files</span>
+(setq org-directory <span class="org-string">"~/Documents/org"</span>)
+(setq org-agenda-files (list <span class="org-string">"inbox.org"</span> <span class="org-string">"agenda.org"</span>
+                             <span class="org-string">"notes.org"</span> <span class="org-string">"projects.org"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Capture</span>
+(setq org-capture-templates
+      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))
+        (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
+         (concat <span class="org-string">"* %? :meeting:\n"</span>
+                 <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
+        (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
+         (concat <span class="org-string">"* Note (%a)\n"</span>
+                 <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
+        (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
+         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+                 <span class="org-string">"/Entered on/ %U"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
+     (interactive)
+     (call-interactively 'org-store-link)
+     (org-capture nil <span class="org-string">"i"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-mail</span> ()
+  (interactive)
+  (call-interactively 'org-store-link)
+  (org-capture nil <span class="org-string">"@"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Use full window for org-capture</span>
+(add-hook 'org-capture-mode-hook 'delete-other-windows)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Key bindings</span>
+(define-key global-map            (kbd <span class="org-string">"C-c a"</span>) 'org-agenda)
+(define-key global-map            (kbd <span class="org-string">"C-c c"</span>) 'org-capture)
+(define-key global-map            (kbd <span class="org-string">"C-c i"</span>) 'org-capture-inbox)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Only if you use mu4e</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(require 'mu4e)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-headers-mode-map (kbd "C-c i") 'org-capture-mail)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(define-key mu4e-view-mode-map    (kbd "C-c i") 'org-capture-mail)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Refile</span>
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+(setq org-refile-targets
+      '((<span class="org-string">"projects.org"</span> :regexp . <span class="org-string">"\\(?:\\(?:Note\\|Task\\)s\\)"</span>)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">TODO</span>
+(setq org-todo-keywords
+      '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"HOLD(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d)"</span>)))
+(<span class="org-keyword">defun</span> <span class="org-function-name">log-todo-next-creation-date</span> (&amp;rest ignore)
+  <span class="org-doc">"Log NEXT creation time in the property drawer under the key 'ACTIVATED'"</span>
+  (when (and (string= (org-get-todo-state) <span class="org-string">"NEXT"</span>)
+             (not (org-entry-get nil <span class="org-string">"ACTIVATED"</span>)))
+    (org-entry-put nil <span class="org-string">"ACTIVATED"</span> (format-time-string <span class="org-string">"[%Y-%m-%d]"</span>))))
+(add-hook 'org-after-todo-state-change-hook #'log-todo-next-creation-date)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Agenda</span>
+(setq org-agenda-custom-commands
+      '((<span class="org-string">"g"</span> <span class="org-string">"Get Things Done (GTD)"</span>
+         ((agenda <span class="org-string">""</span>
+                  ((org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'deadline))
+                   (org-deadline-warning-days 0)))
+          (todo <span class="org-string">"NEXT"</span>
+                ((org-agenda-skip-function
+                  '(org-agenda-skip-entry-if 'deadline))
+                 (org-agenda-prefix-format <span class="org-string">"  %i %-12:c [%e] "</span>)
+                 (org-agenda-overriding-header <span class="org-string">"\nTasks\n"</span>)))
+          (agenda nil
+                  ((org-agenda-entry-types '(:deadline))
+                   (org-agenda-format-date <span class="org-string">""</span>)
+                   (org-deadline-warning-days 7)
+                   (org-agenda-skip-function
+                    '(org-agenda-skip-entry-if 'notregexp <span class="org-string">"\\* NEXT"</span>))
+                   (org-agenda-overriding-header <span class="org-string">"\nDeadlines"</span>)))
+          (tags-todo <span class="org-string">"inbox"</span>
+                     ((org-agenda-prefix-format <span class="org-string">"  %?-12t% s"</span>)
+                      (org-agenda-overriding-header <span class="org-string">"\nInbox\n"</span>)))
+          (tags <span class="org-string">"CLOSED&gt;=\"&lt;today&gt;\""</span>
+                ((org-agenda-overriding-header <span class="org-string">"\nCompleted today\n"</span>)))))))
+</pre>
+</div>
+</details>
+
+
+<p>
+The set of available commands is now:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Command</th>
+<th scope="col" class="org-left">Bindings</th>
+<th scope="col" class="org-left">Mode + where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Agenda</td>
+<td class="org-left"><b>C-c a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Agenda for today</td>
+<td class="org-left"><b>C-c a a</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture menu</td>
+<td class="org-left"><b>C-c c</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting (agenda.org)</td>
+<td class="org-left"><b>C-c c m</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture meeting note (notes.org)</td>
+<td class="org-left"><b>C-c c n</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture generic TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c i</b></td>
+<td class="org-left">any</td>
+</tr>
+
+<tr>
+<td class="org-left">Capture mail TODO (inbox.org)</td>
+<td class="org-left"><b>C-c i</b> or <b>C-c c @</b></td>
+<td class="org-left">mu4e view/headers mode</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Add/Remove tag</td>
+<td class="org-left"><b>C-c C-c</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Update progress indicator</td>
+<td class="org-left"><b>C-c C-c</b></td>
+<td class="org-left">org-mode on [/]</td>
+</tr>
+
+<tr>
+<td class="org-left">Update all progress indicators</td>
+<td class="org-left"><b>C-u C-c #</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Enter estimated effort</td>
+<td class="org-left"><b>C-c C-x e</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Refile section</td>
+<td class="org-left"><b>C-c C-w</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Move to next TODO state</td>
+<td class="org-left"><b>S-right</b></td>
+<td class="org-left">org-mode on TODO</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Clock in</td>
+<td class="org-left"><b>C-c C-x i</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">Clock out</td>
+<td class="org-left"><b>C-c C-x o</b></td>
+<td class="org-left">org-mode on headline</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Plain timestamp</td>
+<td class="org-left"><b>C-c .</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Scheduled timestamp</td>
+<td class="org-left"><b>C-c s</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Deadline timestamp</td>
+<td class="org-left"><b>C-c d</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+
+<tr>
+<td class="org-left">Inactive timestamp</td>
+<td class="org-left"><b>C-c !</b></td>
+<td class="org-left">org-mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga7613f9" class="outline-2">
+<h2 id="orga7613f9">Conclusion</h2>
+<div class="outline-text-2" id="text-orga7613f9">
+<div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
+
+<p>
+I'm now done describing my GTD setup and I hope it will be useful for some
+readers. I'm rather new to GTD and there are certainly better ways to
+implement GTD (see <a href="#org9070d2a">Resources</a>) and probably I'll modify some parts in the
+future.
+</p>
+
+<p>
+If you spot errors or typos, feel free to open an issue at
+<a href="https://github.com/rougier/emacs-GTD">https://github.com/rougier/emacs-GTD</a>. 
+</p>
+</div>
+
+<div id="outline-container-orge5a75a5" class="outline-3">
+<h3 id="orge5a75a5">Going further</h3>
+<div class="outline-text-3" id="text-orge5a75a5">
+<p>
+As explained in the introduction, there are plenty of resources online
+regarding org-mode in general and GTD with org-mode in particular. There
+are also plenty of interactive places where you ask for help and find some
+code:
+</p>
+
+<ul class="org-ul">
+<li><a href="https://emacs.stackexchange.com/questions/tagged/org-mode">Emacs Stack Exchange</a></li>
+<li><a href="https://webchat.freenode.net/">IRC freenode</a> (#org-mode)</li>
+<li><a href="https://www.reddit.com/r/orgmode/">Reddit</a> (orgmode)</li>
+<li><a href="https://lists.gnu.org/mailman/listinfo/emacs-orgmode">Mailing list</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
