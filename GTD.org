@@ -388,7 +388,7 @@ present. Of course, you can choose to be more specific and hide only some
 tags, it's up to you. Now we still have to choose what to do with the left
 part displaying "inbox". This is displayed because there is no [[https://orgmode.org/manual/Categories.html][category]]
 assigned to the entry and when the agenda display a TODO item, the default
-behabior is to display the category or the filename if there is no
+behavior is to display the category or the filename if there is no
 category. You can of course change what is actually displayed by modifying
 the [[https://orgmode.org/manual/Presentation-and-Sorting.html][org-agenda-prefix-format]]:
 
@@ -1086,7 +1086,7 @@ To summarize, for a given task:
   /Entered on [2020-09-13 Sun 19:23]/
 #+end_src
 
-hIt will be first modified be when the estimated effort is set:
+It will be first modified be when the estimated effort is set:
 
 #+begin_src org
 ,* TODO Some task
