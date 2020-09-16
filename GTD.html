@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-09-14 Mon 07:09 -->
+<!-- 2020-09-16 Wed 16:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Get Things Done with Emacs</title>
@@ -21,57 +21,57 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd90ee23">Introduction</a>
+<li><a href="#orgd49b7c2">Introduction</a>
 <ul>
-<li><a href="#org3e6e92c">Get Things Done</a></li>
-<li><a href="#orgd68c131">About this document</a></li>
-<li><a href="#org68d5da6">License</a></li>
-<li><a href="#org9070d2a">Resources</a></li>
+<li><a href="#org47a023c">Get Things Done</a></li>
+<li><a href="#orga2f4c1b">About this document</a></li>
+<li><a href="#org243af81">License</a></li>
+<li><a href="#org8c1a67b">Resources</a></li>
 </ul>
 </li>
-<li><a href="#org254b6c4">Inbox</a>
+<li><a href="#org08568ce">Inbox</a>
 <ul>
-<li><a href="#orgb07a87a">Basic setup</a></li>
-<li><a href="#org71e92df">Working with mail</a></li>
-<li><a href="#orgc1a2f5e">Capturing tasks</a></li>
-<li><a href="#org2e94921">Summary</a></li>
+<li><a href="#orge8722f1">Basic setup</a></li>
+<li><a href="#orgb3abe64">Working with mail</a></li>
+<li><a href="#org44538e0">Capturing tasks</a></li>
+<li><a href="#orga796935">Summary</a></li>
 </ul>
 </li>
-<li><a href="#org63c12ab">Agenda</a>
+<li><a href="#org6e1a751">Agenda</a>
 <ul>
-<li><a href="#org8921d9b">Basic setup (I)</a></li>
-<li><a href="#org40e4c6f">Recurrent events</a></li>
-<li><a href="#orgc5cd1ca">Meetings &amp; notes</a></li>
-<li><a href="#org7afb7bd">Summary</a></li>
+<li><a href="#org6167cec">Basic setup (I)</a></li>
+<li><a href="#orgf37ce6d">Recurrent events</a></li>
+<li><a href="#org641d4e4">Meetings &amp; notes</a></li>
+<li><a href="#org2eba302">Summary</a></li>
 </ul>
 </li>
-<li><a href="#org471694e">Review</a>
+<li><a href="#orga3b470c">Review</a>
 <ul>
-<li><a href="#org5e589b9">Basic setup</a></li>
-<li><a href="#org2dd97eb">Moving things</a></li>
-<li><a href="#orgbcbb183">Activating tasks</a></li>
-<li><a href="#org5394429">Summary</a></li>
+<li><a href="#org5b1a3c9">Basic setup</a></li>
+<li><a href="#org5608b50">Moving things</a></li>
+<li><a href="#org0a87c10">Activating tasks</a></li>
+<li><a href="#org29e568a">Summary</a></li>
 </ul>
 </li>
-<li><a href="#org982c154">Doing things</a>
+<li><a href="#org2877ac0">Doing things</a>
 <ul>
-<li><a href="#org80b7b81">Agenda setup (II)</a></li>
-<li><a href="#org52a364d">Completing a task</a></li>
-<li><a href="#orga8482d6">Summary</a></li>
+<li><a href="#orgb0750f3">Agenda setup (II)</a></li>
+<li><a href="#orgb63bcb3">Completing a task</a></li>
+<li><a href="#org6c83c90">Summary</a></li>
 </ul>
 </li>
-<li><a href="#orga7613f9">Conclusion</a>
+<li><a href="#orgb3302ea">Conclusion</a>
 <ul>
-<li><a href="#orge5a75a5">Going further</a></li>
+<li><a href="#orge043d47">Going further</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd90ee23" class="outline-2">
-<h2 id="orgd90ee23">Introduction</h2>
-<div class="outline-text-2" id="text-orgd90ee23">
+<div id="outline-container-orgd49b7c2" class="outline-2">
+<h2 id="orgd49b7c2">Introduction</h2>
+<div class="outline-text-2" id="text-orgd49b7c2">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 
 <p>
@@ -102,9 +102,9 @@ All these activities requires some organisation.
 </p>
 </div>
 
-<div id="outline-container-org3e6e92c" class="outline-3">
-<h3 id="org3e6e92c">Get Things Done</h3>
-<div class="outline-text-3" id="text-org3e6e92c">
+<div id="outline-container-org47a023c" class="outline-3">
+<h3 id="org47a023c">Get Things Done</h3>
+<div class="outline-text-3" id="text-org47a023c">
 <p>
 I've decided some weeks ago to (try to) adopt the method of David Allen
 named "Get Things Done" (GTD). A lot of people were giving very positive
@@ -139,9 +139,9 @@ later with some improvements, just for the sake of clarity.
 </div>
 </div>
 
-<div id="outline-container-orgd68c131" class="outline-3">
-<h3 id="orgd68c131">About this document</h3>
-<div class="outline-text-3" id="text-orgd68c131">
+<div id="outline-container-orga2f4c1b" class="outline-3">
+<h3 id="orga2f4c1b">About this document</h3>
+<div class="outline-text-3" id="text-orga2f4c1b">
 <p>
 In all the following section, I'll suppose you're familiar with emacs (of
 course) and knows bit of org-mode. If this is not the case, you can follow
@@ -158,9 +158,9 @@ The sources of this document is: <a href="https://github.com/rougier/emacs-GTD">
 </div>
 </div>
 
-<div id="outline-container-org68d5da6" class="outline-3">
-<h3 id="org68d5da6">License</h3>
-<div class="outline-text-3" id="text-org68d5da6">
+<div id="outline-container-org243af81" class="outline-3">
+<h3 id="org243af81">License</h3>
+<div class="outline-text-3" id="text-org243af81">
 <p>
 This document has been written in org mode (<a href="GTD.org"><code>GTD.org</code></a>) using a customized
 CSS stylesheet (<a href="GTD.css"><code>GTD.css</code>)</a> released (both) under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0 international
@@ -169,9 +169,9 @@ license</a>. Feel free to re-use it if you like it.
 </div>
 </div>
 
-<div id="outline-container-org9070d2a" class="outline-3">
-<h3 id="org9070d2a">Resources</h3>
-<div class="outline-text-3" id="text-org9070d2a">
+<div id="outline-container-org8c1a67b" class="outline-3">
+<h3 id="org8c1a67b">Resources</h3>
+<div class="outline-text-3" id="text-org8c1a67b">
 <p>
 Here are various resources that helped me to design my workflow:
 </p>
@@ -259,15 +259,15 @@ code for literal programming and reproducible research.
 </div>
 </div>
 
-<div id="outline-container-org254b6c4" class="outline-2">
-<h2 id="org254b6c4">Inbox</h2>
-<div class="outline-text-2" id="text-org254b6c4">
+<div id="outline-container-org08568ce" class="outline-2">
+<h2 id="org08568ce">Inbox</h2>
+<div class="outline-text-2" id="text-org08568ce">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 </div>
 
-<div id="outline-container-orgb07a87a" class="outline-3">
-<h3 id="orgb07a87a">Basic setup</h3>
-<div class="outline-text-3" id="text-orgb07a87a">
+<div id="outline-container-orge8722f1" class="outline-3">
+<h3 id="orge8722f1">Basic setup</h3>
+<div class="outline-text-3" id="text-orge8722f1">
 <p>
 The first step I was interested in was a way to quickly capture any idea
 that I may have during the day. My goal was to have a non-disruptive
@@ -306,8 +306,8 @@ then we can setup a specific capture template for inbox:
 
 <div class="org-src-container">
 <pre class="src src-lisp">(setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+       `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 </pre>
 </div>
@@ -339,9 +339,9 @@ to use it quite often, I prefer to have shorter bindings:
 </div>
 </div>
 
-<div id="outline-container-org71e92df" class="outline-3">
-<h3 id="org71e92df">Working with mail</h3>
-<div class="outline-text-3" id="text-org71e92df">
+<div id="outline-container-orgb3abe64" class="outline-3">
+<h3 id="orgb3abe64">Working with mail</h3>
+<div class="outline-text-3" id="text-orgb3abe64">
 <p>
 For a long time, I've been using my mail inbox as a todo box, i.e. a
 collection of emails that call for action. Any mail that was not archived
@@ -357,11 +357,11 @@ inbox.
 
 <div class="org-src-container">
 <pre class="src src-lisp">(setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+      `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))
         (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO Process \"%a\" %?\n"</span>
+        ,(concat <span class="org-string">"* TODO Process \"%a\" %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 </pre>
 </div>
@@ -405,9 +405,9 @@ mostly depends on your taste.
 </div>
 </div>
 
-<div id="outline-container-orgc1a2f5e" class="outline-3">
-<h3 id="orgc1a2f5e">Capturing tasks</h3>
-<div class="outline-text-3" id="text-orgc1a2f5e">
+<div id="outline-container-org44538e0" class="outline-3">
+<h3 id="org44538e0">Capturing tasks</h3>
+<div class="outline-text-3" id="text-org44538e0">
 <p>
 Any time you want to enter something in your inbox, be it a note or
 something related to a mail, just type <code>C-c i</code> and you should see the
@@ -461,9 +461,9 @@ will lead to the creation of a new project.
 </div>
 </div>
 
-<div id="outline-container-org2e94921" class="outline-3">
-<h3 id="org2e94921">Summary</h3>
-<div class="outline-text-3" id="text-org2e94921">
+<div id="outline-container-orga796935" class="outline-3">
+<h3 id="orga796935">Summary</h3>
+<div class="outline-text-3" id="text-orga796935">
 <p>
 Our first (incomplete) GTD configuration is:
 </p>
@@ -476,11 +476,11 @@ Our first (incomplete) GTD configuration is:
 (setq org-agenda-files (list <span class="org-string">"inbox.org"</span>))
 
 (setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+      `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))
         (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+        ,(concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
@@ -552,15 +552,15 @@ The set of available commands at this point is:
 </div>
 </div>
 
-<div id="outline-container-org63c12ab" class="outline-2">
-<h2 id="org63c12ab">Agenda</h2>
-<div class="outline-text-2" id="text-org63c12ab">
+<div id="outline-container-org6e1a751" class="outline-2">
+<h2 id="org6e1a751">Agenda</h2>
+<div class="outline-text-2" id="text-org6e1a751">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 </div>
 
-<div id="outline-container-org8921d9b" class="outline-3">
-<h3 id="org8921d9b">Basic setup (I)</h3>
-<div class="outline-text-3" id="text-org8921d9b">
+<div id="outline-container-org6167cec" class="outline-3">
+<h3 id="org6167cec">Basic setup (I)</h3>
+<div class="outline-text-3" id="text-org6167cec">
 <p>
 Before heading to the review process, we need first to setup the <a href="https://orgmode.org/manual/Agenda-Views.html#Agenda-Views">agenda</a>
 that will help us to track daily meetings and tasks. Using the previous
@@ -615,7 +615,7 @@ present. Of course, you can choose to be more specific and hide only some
 tags, it's up to you. Now we still have to choose what to do with the left
 part displaying "inbox". This is displayed because there is no <a href="https://orgmode.org/manual/Categories.html">category</a>
 assigned to the entry and when the agenda display a TODO item, the default
-behabior is to display the category or the filename if there is no
+behavior is to display the category or the filename if there is no
 category. You can of course change what is actually displayed by modifying
 the <a href="https://orgmode.org/manual/Presentation-and-Sorting.html">org-agenda-prefix-format</a>:
 </p>
@@ -664,10 +664,9 @@ And the result is:
 </div>
 </div>
 
-
-<div id="outline-container-org40e4c6f" class="outline-3">
-<h3 id="org40e4c6f">Recurrent events</h3>
-<div class="outline-text-3" id="text-org40e4c6f">
+<div id="outline-container-orgf37ce6d" class="outline-3">
+<h3 id="orgf37ce6d">Recurrent events</h3>
+<div class="outline-text-3" id="text-orgf37ce6d">
 <p>
 Beside notes taking, I send or received a number of appointments (generally
 through mail) and I need to save them. I prefer not to file them in my
@@ -805,9 +804,9 @@ timestamps have no special behavior.</dd>
 </div>
 </div>
 
-<div id="outline-container-orgc5cd1ca" class="outline-3">
-<h3 id="orgc5cd1ca">Meetings &amp; notes</h3>
-<div class="outline-text-3" id="text-orgc5cd1ca">
+<div id="outline-container-org641d4e4" class="outline-3">
+<h3 id="org641d4e4">Meetings &amp; notes</h3>
+<div class="outline-text-3" id="text-org641d4e4">
 <p>
 Now it is time to define a new capture template for registering a meeting.
 </p>
@@ -879,9 +878,9 @@ later moved to the relevant project they belong to.
 </div>
 </div>
 
-<div id="outline-container-org7afb7bd" class="outline-3">
-<h3 id="org7afb7bd">Summary</h3>
-<div class="outline-text-3" id="text-org7afb7bd">
+<div id="outline-container-org2eba302" class="outline-3">
+<h3 id="org2eba302">Summary</h3>
+<div class="outline-text-3" id="text-org2eba302">
 <p>
 Here is our updated configuration:
 </p>
@@ -894,17 +893,17 @@ Here is our updated configuration:
 (setq org-agenda-files (list <span class="org-string">"inbox.org"</span> <span class="org-string">"agenda.org"</span> <span class="org-string">"notes.org"</span>))
 
 (setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+      `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))
         (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
-         (concat <span class="org-string">"* %? :meeting:\n"</span>
+        ,(concat <span class="org-string">"* %? :meeting:\n"</span>
                  <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
         (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
-         (concat <span class="org-string">"* Note (%a)\n"</span>
+        ,(concat <span class="org-string">"* Note (%a)\n"</span>
                  <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
         (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+        ,(concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
@@ -1049,9 +1048,9 @@ The set of available commands is now:
 </div>
 </div>
 
-<div id="outline-container-org471694e" class="outline-2">
-<h2 id="org471694e">Review</h2>
-<div class="outline-text-2" id="text-org471694e">
+<div id="outline-container-orga3b470c" class="outline-2">
+<h2 id="orga3b470c">Review</h2>
+<div class="outline-text-2" id="text-orga3b470c">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 
 <p>
@@ -1068,9 +1067,9 @@ done during the day, and what may come next for each project.
 </p>
 </div>
 
-<div id="outline-container-org5e589b9" class="outline-3">
-<h3 id="org5e589b9">Basic setup</h3>
-<div class="outline-text-3" id="text-org5e589b9">
+<div id="outline-container-org5b1a3c9" class="outline-3">
+<h3 id="org5b1a3c9">Basic setup</h3>
+<div class="outline-text-3" id="text-org5b1a3c9">
 <p>
 My review process consists mostly in moving things out of the inbox in
 order to file them in the corresponding project if it exists or to create
@@ -1144,9 +1143,9 @@ others do not have foreseeable end (house, garden, car).
 </div>
 </div>
 
-<div id="outline-container-org2dd97eb" class="outline-3">
-<h3 id="org2dd97eb">Moving things</h3>
-<div class="outline-text-3" id="text-org2dd97eb">
+<div id="outline-container-org5608b50" class="outline-3">
+<h3 id="org5608b50">Moving things</h3>
+<div class="outline-text-3" id="text-org5608b50">
 <p>
 Before refiling inbox entries into projects, I usually try to set an
 estimated time (effort) needed to complete the tasks as well as some
@@ -1257,9 +1256,9 @@ and this will be resolved to <code>"projects.org/Students/J.Doe/Tasks"</code>.
 </div>
 </div>
 
-<div id="outline-container-orgbcbb183" class="outline-3">
-<h3 id="orgbcbb183">Activating tasks</h3>
-<div class="outline-text-3" id="text-orgbcbb183">
+<div id="outline-container-org0a87c10" class="outline-3">
+<h3 id="org0a87c10">Activating tasks</h3>
+<div class="outline-text-3" id="text-org0a87c10">
 <p>
 After having emptied the inbox, it's time to have a look at the different
 projects to decide what are the next tasks to be activated. Before doing
@@ -1305,9 +1304,9 @@ keyword and use <code>S-right</code> to advance to the <b>NEXT</b> state.
 </div>
 </div>
 
-<div id="outline-container-org5394429" class="outline-3">
-<h3 id="org5394429">Summary</h3>
-<div class="outline-text-3" id="text-org5394429">
+<div id="outline-container-org29e568a" class="outline-3">
+<h3 id="org29e568a">Summary</h3>
+<div class="outline-text-3" id="text-org29e568a">
 <p>
 Here is our updated configuration:
 </p>
@@ -1322,17 +1321,17 @@ Here is our updated configuration:
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Capture</span>
 (setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+      `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))
         (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
-         (concat <span class="org-string">"* %? :meeting:\n"</span>
+        ,(concat <span class="org-string">"* %? :meeting:\n"</span>
                  <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
         (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
-         (concat <span class="org-string">"* Note (%a)\n"</span>
+        ,(concat <span class="org-string">"* Note (%a)\n"</span>
                  <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
         (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+        ,(concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
@@ -1526,15 +1525,15 @@ The set of available commands is now:
 </div>
 </div>
 
-<div id="outline-container-org982c154" class="outline-2">
-<h2 id="org982c154">Doing things</h2>
-<div class="outline-text-2" id="text-org982c154">
+<div id="outline-container-org2877ac0" class="outline-2">
+<h2 id="org2877ac0">Doing things</h2>
+<div class="outline-text-2" id="text-org2877ac0">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 </div>
 
-<div id="outline-container-org80b7b81" class="outline-3">
-<h3 id="org80b7b81">Agenda setup (II)</h3>
-<div class="outline-text-3" id="text-org80b7b81">
+<div id="outline-container-orgb0750f3" class="outline-3">
+<h3 id="orgb0750f3">Agenda setup (II)</h3>
+<div class="outline-text-3" id="text-orgb0750f3">
 <p>
 It's now time to work on custom agenda view that will display meetings for
 the day, task that need to be done and deadlines. We'all also add the
@@ -1648,9 +1647,9 @@ this estimation. Very convenient.
 </div>
 </div>
 
-<div id="outline-container-org52a364d" class="outline-3">
-<h3 id="org52a364d">Completing a task</h3>
-<div class="outline-text-3" id="text-org52a364d">
+<div id="outline-container-orgb63bcb3" class="outline-3">
+<h3 id="orgb63bcb3">Completing a task</h3>
+<div class="outline-text-3" id="text-orgb63bcb3">
 <p>
 Once you've chosen a task to do, and before starting the task, you can
 choose to log the time it will actually take to complete the task such that
@@ -1684,7 +1683,7 @@ To summarize, for a given task:
 </div>
 
 <p>
-hIt will be first modified be when the estimated effort is set:
+It will be first modified be when the estimated effort is set:
 </p>
 
 <div class="org-src-container">
@@ -1735,9 +1734,9 @@ on the above log, we'll probably set it to 20 minutes instead of 30.
 </div>
 </div>
 
-<div id="outline-container-orga8482d6" class="outline-3">
-<h3 id="orga8482d6">Summary</h3>
-<div class="outline-text-3" id="text-orga8482d6">
+<div id="outline-container-org6c83c90" class="outline-3">
+<h3 id="org6c83c90">Summary</h3>
+<div class="outline-text-3" id="text-org6c83c90">
 <p>
 Our final configuration is thus
 </p>
@@ -1753,17 +1752,17 @@ Our final configuration is thus
 
 <span class="org-comment-delimiter">;; </span><span class="org-comment">Capture</span>
 (setq org-capture-templates
-      '((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO %?\n"</span>
+      `((<span class="org-string">"i"</span> <span class="org-string">"Inbox"</span> entry  (file <span class="org-string">"inbox.org"</span>)
+        ,(concat <span class="org-string">"* TODO %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))
         (<span class="org-string">"m"</span> <span class="org-string">"Meeting"</span> entry  (file+headline <span class="org-string">"agenda.org"</span> <span class="org-string">"Future"</span>)
-         (concat <span class="org-string">"* %? :meeting:\n"</span>
+        ,(concat <span class="org-string">"* %? :meeting:\n"</span>
                  <span class="org-string">"&lt;%&lt;%Y-%m-%d %a %H:00&gt;&gt;"</span>))
         (<span class="org-string">"n"</span> <span class="org-string">"Note"</span> entry  (file <span class="org-string">"notes.org"</span>)
-         (concat <span class="org-string">"* Note (%a)\n"</span>
+        ,(concat <span class="org-string">"* Note (%a)\n"</span>
                  <span class="org-string">"/Entered on/ %U\n"</span> <span class="org-string">"\n"</span> <span class="org-string">"%?"</span>))
         (<span class="org-string">"@"</span> <span class="org-string">"Inbox [mu4e]"</span> entry (file <span class="org-string">"inbox.org"</span>)
-         (concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
+        ,(concat <span class="org-string">"* TODO Reply to \"%a\" %?\n"</span>
                  <span class="org-string">"/Entered on/ %U"</span>))))
 
 (<span class="org-keyword">defun</span> <span class="org-function-name">org-capture-inbox</span> ()
@@ -1999,15 +1998,15 @@ The set of available commands is now:
 </div>
 </div>
 
-<div id="outline-container-orga7613f9" class="outline-2">
-<h2 id="orga7613f9">Conclusion</h2>
-<div class="outline-text-2" id="text-orga7613f9">
+<div id="outline-container-orgb3302ea" class="outline-2">
+<h2 id="orgb3302ea">Conclusion</h2>
+<div class="outline-text-2" id="text-orgb3302ea">
 <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 
 <p>
 I'm now done describing my GTD setup and I hope it will be useful for some
 readers. I'm rather new to GTD and there are certainly better ways to
-implement GTD (see <a href="#org9070d2a">Resources</a>) and probably I'll modify some parts in the
+implement GTD (see <a href="#org8c1a67b">Resources</a>) and probably I'll modify some parts in the
 future.
 </p>
 
@@ -2017,9 +2016,9 @@ If you spot errors or typos, feel free to open an issue at
 </p>
 </div>
 
-<div id="outline-container-orge5a75a5" class="outline-3">
-<h3 id="orge5a75a5">Going further</h3>
-<div class="outline-text-3" id="text-orge5a75a5">
+<div id="outline-container-orge043d47" class="outline-3">
+<h3 id="orge043d47">Going further</h3>
+<div class="outline-text-3" id="text-orge043d47">
 <p>
 As explained in the introduction, there are plenty of resources online
 regarding org-mode in general and GTD with org-mode in particular. There
