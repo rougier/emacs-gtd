@@ -172,8 +172,9 @@ then we can setup a specific capture template for inbox:
 
 #+begin_src lisp
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         "* TODO %?\n /Entered on/ %U")))
+       `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
+                 "/Entered on/ %U"))))
 #+end_src
 
 and setup a keyboard shortcut (=C-c c=):
