@@ -212,10 +212,10 @@ inbox.
 #+begin_src lisp
 (setq org-capture-templates
       `(("i" "Inbox" entry  (file "inbox.org")
-         ,(concat "* TODO %?\n"
+        ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         ,(concat "* TODO Process \"%a\" %?\n"
+        ,(concat "* TODO Process \"%a\" %?\n"
                  "/Entered on/ %U"))))
 #+end_src
 
