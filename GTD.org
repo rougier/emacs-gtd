@@ -211,11 +211,11 @@ inbox.
 
 #+begin_src lisp
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         (concat "* TODO %?\n"
+      `(("i" "Inbox" entry  (file "inbox.org")
+         ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         (concat "* TODO Process \"%a\" %?\n"
+         ,(concat "* TODO Process \"%a\" %?\n"
                  "/Entered on/ %U"))))
 #+end_src
 
@@ -301,11 +301,11 @@ Our first (incomplete) GTD configuration is:
 (setq org-agenda-files (list "inbox.org"))
 
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         (concat "* TODO %?\n"
+      `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         (concat "* TODO Reply to \"%a\" %?\n"
+        ,(concat "* TODO Reply to \"%a\" %?\n"
                  "/Entered on/ %U"))))
 
 (defun org-capture-inbox ()
@@ -605,17 +605,17 @@ Here is our updated configuration:
 (setq org-agenda-files (list "inbox.org" "agenda.org" "notes.org"))
 
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         (concat "* TODO %?\n"
+      `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
-         (concat "* %? :meeting:\n"
+        ,(concat "* %? :meeting:\n"
                  "<%<%Y-%m-%d %a %H:00>>"))
         ("n" "Note" entry  (file "notes.org")
-         (concat "* Note (%a)\n"
+        ,(concat "* Note (%a)\n"
                  "/Entered on/ %U\n" "\n" "%?"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         (concat "* TODO Reply to \"%a\" %?\n"
+        ,(concat "* TODO Reply to \"%a\" %?\n"
                  "/Entered on/ %U"))))
 
 (defun org-capture-inbox ()
@@ -874,17 +874,17 @@ Here is our updated configuration:
 
 ;; Capture
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         (concat "* TODO %?\n"
+      `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
-         (concat "* %? :meeting:\n"
+        ,(concat "* %? :meeting:\n"
                  "<%<%Y-%m-%d %a %H:00>>"))
         ("n" "Note" entry  (file "notes.org")
-         (concat "* Note (%a)\n"
+        ,(concat "* Note (%a)\n"
                  "/Entered on/ %U\n" "\n" "%?"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         (concat "* TODO Reply to \"%a\" %?\n"
+        ,(concat "* TODO Reply to \"%a\" %?\n"
                  "/Entered on/ %U"))))
 
 (defun org-capture-inbox ()
@@ -1140,17 +1140,17 @@ Our final configuration is thus
 
 ;; Capture
 (setq org-capture-templates
-      '(("i" "Inbox" entry  (file "inbox.org")
-         (concat "* TODO %?\n"
+      `(("i" "Inbox" entry  (file "inbox.org")
+        ,(concat "* TODO %?\n"
                  "/Entered on/ %U"))
         ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
-         (concat "* %? :meeting:\n"
+        ,(concat "* %? :meeting:\n"
                  "<%<%Y-%m-%d %a %H:00>>"))
         ("n" "Note" entry  (file "notes.org")
-         (concat "* Note (%a)\n"
+        ,(concat "* Note (%a)\n"
                  "/Entered on/ %U\n" "\n" "%?"))
         ("@" "Inbox [mu4e]" entry (file "inbox.org")
-         (concat "* TODO Reply to \"%a\" %?\n"
+        ,(concat "* TODO Reply to \"%a\" %?\n"
                  "/Entered on/ %U"))))
 
 (defun org-capture-inbox ()
