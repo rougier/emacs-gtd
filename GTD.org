@@ -397,7 +397,7 @@ the [[https://orgmode.org/manual/Presentation-and-Sorting.html][org-agenda-prefi
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " %i %-12:c")
         (tags   . " %i %-12:c")
-        (search . " %i %-12:c"))
+        (search . " %i %-12:c")))
 #+end_src
 
 We could also add a /#+CATEGORY: INBOX/ to the header of our inbox file but I
@@ -409,7 +409,7 @@ category display for todo items:
       '((agenda . " %i %-12:c%?-12t% s")
         (todo   . " ")
         (tags   . " %i %-12:c")
-        (search . " %i %-12:c"))
+        (search . " %i %-12:c")))
 #+end_src
 
 And the result is:
