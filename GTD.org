@@ -658,8 +658,8 @@ The set of available commands is now:
 | Add/Remove tag                   | *C-c C-c*          | org-mode on headline   |
 |                                  |                  |                        |
 | Plain timestamp                  | *C-c .*            | org-mode               |
-| Scheduled timestamp              | *C-c s*            | org-mode               |
-| Deadline timestamp               | *C-c d*            | org-mode               |
+| Scheduled timestamp              | *C-c C-s*          | org-mode               |
+| Deadline timestamp               | *C-c C-d*          | org-mode               |
 | Inactive timestamp               | *C-c !*            | org-mode               |
 
 * Review
@@ -1064,8 +1064,8 @@ this estimation. Very convenient.
 
 Once you've chosen a task to do, and before starting the task, you can
 choose to log the time it will actually take to complete the task such that
-you can later refine your estimation. Just type *C-c C-x i* (clock in) to
-start the clock and *C-c C-x o* (clock out) to stop the clock and to add the
+you can later refine your estimation. Just type *C-c C-x C-i* (clock in) to
+start the clock and *C-c C-x C-o* (clock out) to stop the clock and to add the
 duration in the logbook. Once a task is completed, you can change its state
 from *NEXT* to *DONE* (using *S-right* while the cursor is over the *NEXT*
 word). In order to keep track of when the task was completed, we can ask
@@ -1076,7 +1076,7 @@ org-mode to log that:
 #+end_src
 
 This will add a CLOSED: [2020-09-13 Sun 19:24] line under the corresponding
-entry. Using this time, we can thus diplay the tasks that have been
+entry. Using this time, we can thus display the tasks that have been
 completed during the day (see the last line of our agenda custom commands).
 
 To summarize, for a given task:
@@ -1240,8 +1240,8 @@ The set of available commands is now:
 | Refile section                   | *C-c C-w*          | org-mode on headline   |
 | Move to next TODO state          | *S-right*          | org-mode on TODO       |
 |                                  |                  |                        |
-| Clock in                         | *C-c C-x i*        | org-mode on headline   |
-| Clock out                        | *C-c C-x o*        | org-mode on headline   |
+| Clock in                         | *C-c C-x C-i*      | org-mode on headline   |
+| Clock out                        | *C-c C-x C-o*      | org-mode on headline   |
 |                                  |                  |                        |
 | Plain timestamp                  | *C-c .*            | org-mode               |
 | Scheduled timestamp              | *C-c s*            | org-mode               |
