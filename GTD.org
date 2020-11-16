@@ -788,7 +788,7 @@ Now it's time to move the entry.
 I explained that inbox entries have to be moved into the relevant project
 under the *Tasks* headline. To do that, we'll use the [[https://orgmode.org/manual/Refile-and-Copy.html#Refile-and-Copy][org-refile]] function
 (bound to =C-c C-w= when on a headline) and specify where the entry can be
-refiled in the =projetcs.org=. If your remember, we also have notes that
+refiled in the =projects.org=. If you remember, we also have notes that
 needs to be refiled in projects such that targets in =projects.org= are
 either *Notes* or *Tasks*. We thus need to define a refile target using
 regexp. One easy way to do that is to use the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Regexp-Functions.html][regexp-opt]] function:
