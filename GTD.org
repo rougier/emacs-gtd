@@ -1248,6 +1248,39 @@ The set of available commands is now:
 | Deadline timestamp               | *C-c d*            | org-mode               |
 | Inactive timestamp               | *C-c !*            | org-mode               |
 
+* Additional changes
+** Automatic saving after refilling
+
+After refilling, you will have to save manually your opened org files, which is not really convenient.
+Fortunately, a small change in the code will save the files automatically.
+
+First, you need to get the files you want to save with their fullpath.
+Replace the previous definition of =org-agenda-files= with the following:
+
+#+begin_src lisp
+(setq org-agenda-files 
+      (mapcar 'file-truename 
+	      (file-expand-wildcards "~/Documents/org/*.org")))
+#+end_src
+
+Now, we create a new function to save those files, using the model of the =org-save-all-org-buffers= function and finally we add it after the =org-refile= action:
+#+begin_src lisp
+;; Save the corresponding buffers
+(defun gtd-save-org-buffers ()
+  "Save `org-agenda-files' buffers without user confirmation.
+See also `org-save-all-org-buffers'"
+  (interactive)
+  (message "Saving org-agenda-files buffers...")
+  (save-some-buffers t (lambda () 
+			 (when (member (buffer-file-name) org-agenda-files) 
+			   t)))
+  (message "Saving org-agenda-files buffers... done"))
+
+;; Add it after refile
+(advice-add 'org-refile :after
+	    (lambda (&rest _)
+	      (gtd-save-org-buffers)))
+#+end_src
 * Conclusion
 #+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
 
