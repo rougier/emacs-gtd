@@ -45,7 +45,7 @@ design my own setup since I did not read the book, but I found a nice
 1. *Capture* anything that crosses your mind, nothing is too big or small. 
 2. *Clarify* what you’ve captured into clear and concrete action steps. 
 3. *Organize* and put everything into the right place.
-4. *Review,* update, and revise your lists.
+4. *Review*, update, and revise your lists.
 5. *Engage* Get to work on the important stuff.
 
 Then I read a lot of other Emacs specific resources that were incredibly
