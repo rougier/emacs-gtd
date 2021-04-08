@@ -546,7 +546,7 @@ Now it is time to define a new capture template for registering a meeting.
 
 #+begin_src lisp
 ("m" "Meeting" entry  (file+headline "agenda.org" "Future")
- (concat "* %? :meeting:\n"
+ ,(concat "* %? :meeting:\n"
          "<%<%Y-%m-%d %a %H:00>>"))
 #+end_src
 
@@ -572,7 +572,7 @@ notes during a meeting:
 
 #+begin_src lisp
 ("n" "Note" entry  (file "notes.org")
- (concat "* Note (%a)\n"
+ ,(concat "* Note (%a)\n"
          "/Entered on/ %U\n" "\n" "%?"))
 #+end_src
 
