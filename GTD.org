@@ -65,7 +65,7 @@ In all the following section, I'll suppose you're familiar with emacs (of
 course) and knows bit of org-mode. If this is not the case, you can follow
 the different links I've inserted. They point to the relevant section in
 the org-mode manual. We'll start with a Vanilla emacs without any initial
-configuration ("/emacs -q - GTD.el"/) such that you should obtain the same
+configuration ("/emacs -q -- GTD.el"/) such that you should obtain the same
 result as me. =GTD.el= will be given in each section.
 
 The address of this document is: https://www.labri.fr/perso/nrougier/GTD/index.html\\
