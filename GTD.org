@@ -165,7 +165,7 @@ My initial =inbox.org= reads (we'll modify it later):
 #+end_src
 
 The STARTUP line defines some [[https://orgmode.org/manual/In_002dbuffer-Settings.html][buffer settings]] ([[https://orgmode.org/manual/Initial-visibility.html][initial visibility]], [[https://orgmode.org/manual/Org-Indent-Mode.html][indent
-mode]] and [[https://orgmode.org/manual/Hard-indentation.html#Hard-indentation][star visibility]]) while the [[https://orgmode.org/manual/Tag-Inheritance.html][FILETAGS]] line define a common tag that
+mode]] and [[https://orgmode.org/manual/Hard-indentation.html#Hard-indentation][star visibility]]) while the [[https://orgmode.org/manual/Tag-Inheritance.html][FILETAGS]] line defines a common tag that
 will be inherited by all entries (=inbox= in this case).
 
 then we can setup a specific capture template for inbox:
