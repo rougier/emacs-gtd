@@ -355,7 +355,7 @@ key binding (=C-c a=) for quick access to the agenda:
 (define-key global-map (kbd "C-c a") 'org-agenda)
 #+end_src
 
-No, let's see what our tasks look like by invoking the "List of All TODO
+Now, let's see what our tasks look like by invoking the "List of All TODO
 entries" using the =t= menu (full sequence is thus =C-c a t=):
 
 #+begin_src org
@@ -961,8 +961,8 @@ The set of available commands is now:
 ** Agenda setup (II)
 
 It's now time to work on custom agenda view that will display meetings for
-the day, task that need to be done and deadlines. We'all also add the
-content of the inbox ad a reminder to file entries, and the tasks we've
+the day, task that need to be done and deadlines. We'll also add the
+content of the inbox as a reminder to file entries, and the tasks we've
 completed today. So overall, our custom agenda headers will be:
 
 #+begin_src org
