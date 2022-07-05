@@ -8,6 +8,10 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="GTD.css" />
 #+OPTIONS:   toc:2 html-scripts:nil num:nil html-postamble:nil html-style:nil ^:nil
 # ------------------------------------------------------------------------------
+# (require 'htmlize)
+# (setq org-html-htmlize-output-type 'css)
+#  then export with  Export with `C-c C-e h h`
+# ------------------------------------------------------------------------------
 
 * Introduction
 #+HTML: <div class="back"><a href="#table-of-contents">⌘ Back to top</a></div>
