@@ -446,7 +446,7 @@ new file to the list of org files:
 
 The initial file has a basic startup header configuration and I also
 defined a set of default [[https://orgmode.org/manual/Tags.html][tags]] using the =#+TAGS= syntax. This will ease the
-assignment of tags when adding a new entry or modifying an entry (we'll
+assignment of tags when adding a new entry or modifying an entry (we'll see
 that later):
 
 #+begin_src org
