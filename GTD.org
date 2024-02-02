@@ -1253,9 +1253,9 @@ The set of available commands is now:
 | Inactive timestamp               | *C-c !*            | org-mode               |
 
 * Additional changes
-** Automatic saving after refilling
+** Automatic saving after refiling
 
-After refilling, you will have to save manually your opened org files, which is not really convenient.
+After refiling, you will have to save manually your opened org files, which is not really convenient.
 Fortunately, a small change in the code will save the files automatically.
 
 First, you need to get the files you want to save with their fullpath.
