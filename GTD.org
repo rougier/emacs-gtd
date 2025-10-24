@@ -1230,6 +1230,7 @@ The set of available commands is now:
 |----------------------------------+------------------|------------------------|
 | Agenda                           | *C-c a*            | any                    |
 | Agenda for today                 | *C-c a a*          | any                    |
+| GTD Agenda for today             | *C-c a g*         | any                    |
 |                                  |                  |                        |
 | Capture menu                     | *C-c c*            | any                    |
 | Capture meeting (agenda.org)     | *C-c c m*          | any                    |
