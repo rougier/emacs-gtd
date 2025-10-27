@@ -985,7 +985,8 @@ Let's write a new agenda customn command (=g=) using the
 (setq org-agenda-custom-commands
       '(("g" "Get Things Done (GTD)"
          ((agenda ""
-                  ((org-agenda-skip-function
+                  ((org-agenda-span 'day)
+                   (org-agenda-skip-function
                     '(org-agenda-skip-entry-if 'deadline))
                    (org-deadline-warning-days 0)))
           (todo "NEXT"
